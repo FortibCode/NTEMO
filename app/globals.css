@@ -18,13 +18,13 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
+  --background: #01030c;
+  --foreground: #f8fafc;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0f172a;
+    --background: #01030c;
     --foreground: #f8fafc;
   }
 }
@@ -49,4 +49,79 @@ body {
     background: rgba(15, 23, 42, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
+}
+
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
+  background-color: #01030c;
+  background-image: url('/fluid-bg.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  animation: float-bg 20s infinite alternate ease-in-out;
+}
+
+/* Neon Edge Glows */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 20vw;
+  pointer-events: none;
+  z-index: -5;
+}
+
+body::before {
+  left: 0;
+  background: radial-gradient(ellipse at left, rgba(36, 136, 205, 0.15) 0%, transparent 70%);
+  animation: pulse-edge 8s infinite alternate ease-in-out;
+}
+
+body::after {
+  right: 0;
+  background: radial-gradient(ellipse at right, rgba(52, 196, 235, 0.15) 0%, transparent 70%);
+  animation: pulse-edge 8s infinite alternate-reverse ease-in-out;
+}
+
+@keyframes pulse-edge {
+  0% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+@keyframes float-bg {
+  0% { transform: scale(1.05) translate(0, 0); }
+  100% { transform: scale(1.1) translate(-2%, 2%); }
+}
+
+/* Marquee infinite scroll */
+@keyframes infinite-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes infinite-scroll-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.animate-infinite-scroll {
+  animation: infinite-scroll 35s linear infinite;
+  width: max-content;
+}
+
+.animate-infinite-scroll-reverse {
+  animation: infinite-scroll-reverse 35s linear infinite;
+  width: max-content;
+}
+
+.animate-infinite-scroll:hover,
+.animate-infinite-scroll-reverse:hover {
+  animation-play-state: paused;
 }

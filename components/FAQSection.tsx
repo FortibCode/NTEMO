@@ -31,7 +31,7 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-24 bg-white">
+    <section id="faq" className="py-24">
       <div className="container mx-auto px-4 md:px-8 max-w-4xl">
 
         {/* Header */}
@@ -48,8 +48,8 @@ export default function FAQSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black text-[#0a192f] font-heading leading-tight"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl md:text-5xl font-black text-white font-heading leading-tight"
           >
             Vous avez des <span className="font-serif italic font-normal text-[#2488cd] tracking-wide">questions ?</span>
           </motion.h2>
@@ -67,19 +67,19 @@ export default function FAQSection() {
               className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
                 openIndex === index
                   ? "border-[#34c4eb]/50 bg-[#34c4eb]/5 shadow-lg"
-                  : "border-slate-200 bg-white hover:border-[#34c4eb]/30"
+                  : "border-white/10 bg-slate-900/40 backdrop-blur-md hover:border-[#34c4eb]/30"
               }`}
             >
               <button
+                className="w-full flex items-center justify-between p-6 md:p-8 focus:outline-none bg-white/[0.02] hover:bg-white/[0.05] transition-colors"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full text-left flex items-center justify-between p-6 gap-4 cursor-pointer"
               >
-                <span className="text-lg font-bold text-[#0a192f]">{faq.question}</span>
+                <span className="text-lg font-bold text-white">{faq.question}</span>
                 <motion.div
                   animate={{ rotate: openIndex === index ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                   className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                    openIndex === index ? "bg-[#34c4eb] text-white" : "bg-slate-100 text-slate-600"
+                    openIndex === index ? "bg-[#34c4eb] text-white" : "bg-white/10 text-slate-300"
                   }`}
                 >
                   <ChevronDown size={18} />

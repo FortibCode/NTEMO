@@ -5,15 +5,15 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#030712] text-slate-400 border-t border-white/5">
+    <footer className="text-slate-400 border-t border-white/5 relative z-10">
       <div className="container mx-auto px-4 md:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
 
           {/* Brand Column */}
           <div className="md:col-span-4">
             <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="bg-white rounded-xl p-2 flex items-center justify-center">
-                <svg width="22" height="26" viewBox="0 0 24 32" fill="black" xmlns="http://www.w3.org/2000/svg">
+              <div className="bg-slate-900/60 backdrop-blur-md border border-white/10 rounded-xl p-2 flex items-center justify-center">
+                <svg width="22" height="26" viewBox="0 0 24 32" fill="white" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0 0H6.5L17.5 18V0H24V32H17.5L6.5 14V32H0V0Z" />
                 </svg>
               </div>
@@ -74,7 +74,7 @@ export default function Footer() {
               <li>
                 <a href="tel:+242064313808" className="flex items-start gap-3 hover:text-[#34c4eb] transition-colors">
                   <Phone size={15} className="text-[#34c4eb] flex-shrink-0 mt-0.5" />
-                  <span>Tél.: +242 06 431 38 08</span>
+                  <span className="text-white font-bold">+242 06 431 38 08</span>
                 </a>
               </li>
               <li>
@@ -95,8 +95,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-600">
-          <p>© {currentYear} <span className="text-slate-400 font-semibold">NTEMO Consulting</span>. Tous droits réservés.</p>
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+          <p>© {currentYear} <span className="text-white font-semibold">NTEMO Consulting</span>. Tous droits réservés.</p>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-slate-400 transition-colors">Mentions légales</a>
             <a href="#" className="hover:text-slate-400 transition-colors">Politique de confidentialité</a>

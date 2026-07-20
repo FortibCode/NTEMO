@@ -82,7 +82,7 @@ const getZigzagVariant = (index: number) => ({
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="py-24 bg-[#030712] overflow-hidden">
+    <section id="services" className="py-24 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
 
         {/* Section Header */}
@@ -113,7 +113,7 @@ export default function ServicesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg text-slate-400"
+            className="text-lg text-slate-300"
           >
             Chez NTEMO Consulting, nous activons les leviers stratégiques essentiels pour propulser votre entreprise et la faire briller dans un marché hautement concurrentiel.
           </motion.p>
@@ -163,7 +163,7 @@ export default function ServicesSection() {
                     <h3 className="text-xl font-black text-white mb-2 font-heading leading-tight">
                       {service.title}
                     </h3>
-                    <p className="text-slate-400 leading-relaxed text-sm">
+                    <p className="text-slate-300 leading-relaxed text-sm">
                       {service.description}
                     </p>
                   </div>

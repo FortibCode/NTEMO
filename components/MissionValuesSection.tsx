@@ -61,7 +61,7 @@ const getCardVariant = (index: number): Variants => ({
 
 export default function MissionValuesSection() {
   return (
-    <section className="py-24 bg-white overflow-hidden border-t border-slate-100">
+    <section className="py-24 overflow-hidden border-t border-slate-100/10">
       <div className="container mx-auto px-4 md:px-8">
         
         {/* Section Header */}
@@ -80,7 +80,7 @@ export default function MissionValuesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black text-[#0a192f] font-heading leading-tight mb-6"
+            className="text-4xl md:text-5xl font-black text-white font-heading leading-tight mb-6"
           >
             Notre mission & nos <span className="font-serif italic font-normal text-[#2488cd] tracking-wide">valeurs</span>
           </motion.h2>
@@ -89,7 +89,7 @@ export default function MissionValuesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium"
+            className="text-lg md:text-xl text-slate-300 leading-relaxed font-medium"
           >
             Aider nos clients à communiquer efficacement, à valoriser leur identité et à atteindre leurs objectifs à travers une stratégie claire, cohérente et impactante.
           </motion.p>
@@ -109,7 +109,7 @@ export default function MissionValuesSection() {
                 scale: 1.05,
                 transition: { duration: 0.2, type: "spring", bounce: 0.4 }
               }}
-              className="group relative overflow-hidden bg-slate-50 hover:bg-white rounded-3xl p-6 border border-slate-100 hover:border-slate-200 hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col h-full justify-between"
+              className="group relative overflow-hidden bg-slate-900/40 backdrop-blur-md hover:bg-slate-900/60 rounded-3xl p-6 border border-white/10 hover:border-white/30 hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col h-full justify-between"
             >
               {/* Subtle top indicator bar */}
               <div className={`absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r ${val.color}`} />
@@ -120,10 +120,10 @@ export default function MissionValuesSection() {
                   {val.icon}
                 </div>
 
-                <h3 className="text-lg font-black text-[#0a192f] mb-3 font-heading">
+                <h3 className="text-lg font-black text-white mb-3 font-heading">
                   {val.title}
                 </h3>
-                <p className="text-slate-600 text-sm leading-relaxed font-medium">
+                <p className="text-slate-300 text-sm leading-relaxed font-medium">
                   {val.description}
                 </p>
               </div>

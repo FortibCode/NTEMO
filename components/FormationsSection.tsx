@@ -56,7 +56,7 @@ const formations = [
 
 export default function FormationsSection() {
   return (
-    <section id="formations" className="py-24 bg-slate-50">
+    <section id="formations" className="py-24">
       <div className="container mx-auto px-4 md:px-8">
 
         {/* Header */}
@@ -73,8 +73,8 @@ export default function FormationsSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black text-[#0a192f] font-heading leading-tight mb-5"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl md:text-5xl font-black text-white font-heading leading-tight mb-5"
           >
             Montez en <span className="font-serif italic font-normal text-[#2488cd] tracking-wide">compétences</span>
           </motion.h2>
@@ -83,7 +83,7 @@ export default function FormationsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-slate-600 animate-fade-in"
+            className="text-lg text-slate-400 animate-fade-in"
           >
             Des formations pratiques et certifiantes pour développer vos compétences et accélérer votre insertion ou évolution de carrière.
           </motion.p>
@@ -99,7 +99,7 @@ export default function FormationsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
               whileHover={{ y: -8 }}
-              className="group bg-white rounded-[2rem] p-8 border border-slate-200 hover:border-transparent hover:shadow-2xl transition-all duration-400 relative overflow-hidden cursor-pointer flex flex-col justify-between"
+              className="group bg-slate-900/40 backdrop-blur-md text-white rounded-[2rem] p-8 border border-white/10 hover:border-white/30 hover:shadow-2xl transition-all duration-400 relative overflow-hidden cursor-pointer flex flex-col justify-between"
             >
               {/* Gradient overlay on hover */}
               <div className={`absolute inset-0 rounded-[2rem] bg-gradient-to-br ${formation.color} opacity-0 group-hover:opacity-[0.03] transition-opacity duration-400`} />
@@ -111,32 +111,23 @@ export default function FormationsSection() {
                   <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${formation.color} text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                     {formation.icon}
                   </div>
-                  <div>
+                  <div className="flex-1">
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-0.5">Formation</span>
-                    <h3 className="text-lg font-black text-[#0a192f] font-heading leading-tight">{formation.title}</h3>
+                    <h3 className="text-lg font-black text-white font-heading leading-tight">{formation.title}</h3>
                   </div>
                 </div>
 
-                <p className="text-slate-600 leading-relaxed text-sm mb-6">{formation.description}</p>
+                <p className="text-slate-400 leading-relaxed text-sm mb-6">{formation.description}</p>
               </div>
 
               <div>
                 <div className="flex gap-2.5 mb-5 flex-wrap">
-                  <span className="text-[11px] font-bold bg-slate-100 text-slate-600 px-3 py-1.5 rounded-full">
+                  <span className="text-[11px] font-bold bg-white/10 text-white px-3 py-1.5 rounded-full">
                     ⏱ {formation.duration}
                   </span>
                   <span className="text-[11px] font-bold bg-[#34c4eb]/10 text-[#2488cd] px-3 py-1.5 rounded-full">
                     🎯 {formation.level}
                   </span>
-                </div>
-
-                <div className="pt-4 border-t border-slate-100">
-                  <a
-                    href="#contact"
-                    className={`inline-flex items-center gap-2 text-sm font-bold bg-gradient-to-r ${formation.color} bg-clip-text text-transparent hover:gap-4 transition-all duration-300`}
-                  >
-                    S'inscrire à cette formation →
-                  </a>
                 </div>
               </div>
             </motion.div>

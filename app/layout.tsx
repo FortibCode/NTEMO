@@ -36,7 +36,8 @@ export default function RootLayout({
       lang="fr"
       className={`${inter.variable} ${outfit.variable} ${playfair.variable} scroll-smooth`}
     >
-      <body className="min-h-screen flex flex-col antialiased">
+      <body className="min-h-screen flex flex-col antialiased bg-transparent text-white relative">
+        <div className="animated-bg" />
         {children}
       </body>
     </html>

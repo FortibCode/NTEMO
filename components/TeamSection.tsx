@@ -48,7 +48,7 @@ const getCardVariant = (index: number): Variants => ({
 
 export default function TeamSection() {
   return (
-    <section className="py-28 relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-[#d6f4fd]">
+    <section className="py-28 relative overflow-hidden">
       
       {/* Background cyan/blue glows matching the screenshot overlay */}
       <div className="absolute inset-0 pointer-events-none">
@@ -72,7 +72,7 @@ export default function TeamSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black text-[#0a192f] font-heading tracking-tight mb-4 uppercase"
+            className="text-4xl md:text-5xl font-black text-white font-heading tracking-tight mb-4 uppercase"
           >
             Notre Équipe
           </motion.h2>

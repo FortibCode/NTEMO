@@ -50,7 +50,7 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-24 bg-[#030712] relative overflow-hidden">
+    <section id="contact" className="py-24 relative overflow-hidden">
 
       {/* Decorative background blobs */}
       <div className="absolute inset-0 pointer-events-none">
@@ -86,7 +86,7 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-slate-400"
+            className="text-lg text-slate-200"
           >
             Contactez notre équipe dès aujourd'hui. Nous sommes disponibles par téléphone ou sur WhatsApp pour une réponse rapide.
           </motion.p>
@@ -105,14 +105,14 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             whileHover={{ y: -8, scale: 1.02 }}
-            className="group relative overflow-hidden flex flex-col items-center justify-center p-10 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-green-400/50 rounded-3xl text-center transition-all duration-300 cursor-pointer"
+            className="group relative overflow-hidden flex flex-col items-center justify-center p-10 bg-green-500/10 hover:bg-green-500/20 border-2 border-green-500/30 hover:border-green-400/70 rounded-3xl text-center transition-all duration-300 cursor-pointer shadow-[0_0_30px_rgba(34,197,94,0.1)] hover:shadow-[0_0_50px_rgba(34,197,94,0.25)]"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
             <div className="w-20 h-20 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center mb-6 group-hover:bg-green-500 group-hover:text-white transition-all duration-300 shadow-lg relative z-10">
               <MessageCircle size={36} />
             </div>
             <h3 className="text-2xl font-black text-white mb-2 font-heading relative z-10">WhatsApp</h3>
-            <p className="text-slate-400 group-hover:text-green-300 transition-colors relative z-10">Notre équipe vous répond instantanément</p>
+            <p className="text-slate-200 group-hover:text-green-300 transition-colors relative z-10 font-medium">Notre équipe vous répond instantanément</p>
           </motion.a>
 
           {/* Call Card */}
@@ -123,14 +123,14 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
             whileHover={{ y: -8, scale: 1.02 }}
-            className="group relative overflow-hidden flex flex-col items-center justify-center p-10 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#34c4eb]/50 rounded-3xl text-center transition-all duration-300 cursor-pointer"
+            className="group relative overflow-hidden flex flex-col items-center justify-center p-10 bg-[#34c4eb]/10 hover:bg-[#34c4eb]/20 border-2 border-[#34c4eb]/30 hover:border-[#34c4eb]/70 rounded-3xl text-center transition-all duration-300 cursor-pointer shadow-[0_0_30px_rgba(52,196,235,0.1)] hover:shadow-[0_0_50px_rgba(52,196,235,0.25)]"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-[#34c4eb]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
             <div className="w-20 h-20 rounded-full bg-[#34c4eb]/20 text-[#34c4eb] flex items-center justify-center mb-6 group-hover:bg-[#34c4eb] group-hover:text-white transition-all duration-300 shadow-lg relative z-10">
               <Phone size={36} />
             </div>
             <h3 className="text-2xl font-black text-white mb-2 font-heading relative z-10">Appel Direct</h3>
-            <p className="text-slate-400 group-hover:text-[#34c4eb] transition-colors relative z-10">Nous sommes à votre écoute</p>
+            <p className="text-slate-200 group-hover:text-[#34c4eb] transition-colors relative z-10 font-medium">Nous sommes à votre écoute</p>
           </motion.a>
         </div>
 

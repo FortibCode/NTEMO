@@ -2,190 +2,212 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ShieldCheck, CreditCard, Clock, Share2, Layers, Search, BarChart2, Globe, Smartphone, Layout } from "lucide-react";
 
-const IMAGES = [
-  "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80",
-  "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80",
-  "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80",
-  "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80",
-  "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80",
-  "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=800&q=80",
+const SERVICES = [
+  {
+    icon: <Share2 className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-[#34c4eb]" />,
+    title: "Publicité Réseaux Sociaux",
+    description: "Des campagnes percutantes sur Facebook, Instagram, TikTok et LinkedIn pour booster votre visibilité et générer des leads qualifiés.",
+  },
+  {
+    icon: <Layers className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-[#6366f1]" />,
+    title: "Animation Page Pro",
+    description: "Gestion et animation professionnelle de vos pages d'entreprise pour bâtir une communauté engagée et fidèle.",
+  },
+  {
+    icon: <Search className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-[#10b981]" />,
+    title: "Référencement Naturel (SEO)",
+    description: "Optimisez votre positionnement sur Google pour attirer un trafic qualifié et durable sans dépenser en publicité.",
+  },
+  {
+    icon: <BarChart2 className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-[#f59e0b]" />,
+    title: "Google AdWords",
+    description: "Des campagnes Google Ads ciblées et rentables pour apparaître en tête des résultats au bon moment.",
+  },
+  {
+    icon: <Globe className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-[#ec4899]" />,
+    title: "Création Site Web",
+    description: "Des sites web modernes, rapides et sur mesure qui convertissent vos visiteurs en clients.",
+  },
+  {
+    icon: <Smartphone className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-[#34c4eb]" />,
+    title: "Création Application Mobile",
+    description: "Développement d'applications iOS et Android ergonomiques pour répondre aux besoins de vos utilisateurs.",
+  },
+  {
+    icon: <Layout className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-[#10b981]" />,
+    title: "Site Responsive/Mobile",
+    description: "Des interfaces web parfaitement adaptées à tous les écrans pour une expérience utilisateur optimale.",
+  },
 ];
 
 export default function HeroSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentService, setCurrentService] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % IMAGES.length);
-    }, 4000);
+      setCurrentService((prev) => (prev + 1) % SERVICES.length);
+    }, 4000); // Change every 4 seconds
     return () => clearInterval(timer);
   }, []);
 
-  const displayImages = [
-    IMAGES[currentIndex % IMAGES.length],
-    IMAGES[(currentIndex + 1) % IMAGES.length],
-    IMAGES[(currentIndex + 2) % IMAGES.length],
-  ];
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center pt-32 pb-12 overflow-hidden text-center">
       
-      {/* Background Image with Dark Overlay */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80" 
-          alt="Marketing Digital Background" 
-          className="w-full h-full object-cover"
-        />
-        {/* Dark Slate Overlay for Text Contrast */}
-        <div className="absolute inset-0 bg-slate-900/85" />
-      </div>
+      {/* Global background shines through from layout.tsx */}
 
-      {/* Premium Dynamic Background Enhancements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {/* Subtle dot pattern grid (lightened for dark background) */}
-        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.15)_1px,transparent_1px)] [background-size:24px_24px] opacity-40" />
+      <div className="container mx-auto px-4 md:px-8 z-10 flex flex-col items-center max-w-5xl">
         
-        {/* Gradient masks to fade out the grid naturally at the edges */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/60 to-slate-900" />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-transparent to-slate-900/80" />
+        {/* Top Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, type: "spring", bounce: 0.4 }}
+          className="mb-8"
+        >
+          <div className="inline-flex items-center gap-3 py-1.5 px-2 pr-4 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-sm cursor-pointer hover:bg-white/10 transition-colors shadow-lg">
+            <span className="bg-[#2488cd] text-white text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-[0_0_15px_rgba(36,136,205,0.5)]">Nouveau</span>
+            <span className="text-slate-300 font-medium text-xs sm:text-sm">Découvrez nos services d'expertise</span>
+            <ArrowRight size={14} className="text-slate-400" />
+          </div>
+        </motion.div>
 
-        {/* Dynamic ZigZag SVG lines (adjusted colors for dark background) */}
-        <svg className="absolute w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <motion.path 
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 2, ease: "easeInOut" }}
-            d="M-10,20 L20,50 L40,10 L70,80 L110,40" 
-            fill="none" 
-            stroke="#34c4eb" 
-            strokeWidth="0.5" 
-            vectorEffect="non-scaling-stroke"
-          />
-          <motion.path 
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 2.5, ease: "easeInOut", delay: 0.2 }}
-            d="M-10,80 L30,40 L60,90 L90,30 L110,70" 
-            fill="none" 
-            stroke="#60a5fa" 
-            strokeWidth="0.2" 
-            vectorEffect="non-scaling-stroke"
-          />
-        </svg>
+        {/* Main Heading */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1, type: "spring" }}
+          className="text-5xl md:text-6xl lg:text-7xl font-black font-heading tracking-tight mb-6 text-white leading-[1.1]"
+        >
+          Propulsez Votre Entreprise <br className="hidden md:block" />
+          <span className="font-serif italic font-normal text-slate-200">
+            Avec Notre Expertise
+          </span>
+        </motion.h1>
 
-        {/* Soft floating glow blobs */}
-        <div className="absolute top-0 right-[-10%] w-[800px] h-[800px] bg-gradient-to-br from-[#34c4eb]/20 to-transparent rounded-full blur-[120px] mix-blend-multiply" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-gradient-to-tr from-[#3b82f6]/20 to-transparent rounded-full blur-[100px] mix-blend-multiply" />
-      </div>
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-lg md:text-xl text-slate-200 mb-10 max-w-2xl leading-relaxed"
+        >
+          Optimisez vos opérations, boostez votre productivité et améliorez la satisfaction de vos clients avec notre plateforme de services sur-mesure.
+        </motion.p>
 
-      <div className="container mx-auto px-4 md:px-8 z-10 flex flex-col lg:flex-row items-center gap-16 lg:gap-8">
-        
-        {/* Left Part: Text & CTA */}
-        <div className="w-full lg:w-5/12 flex flex-col items-start text-left relative z-20">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, type: "spring", bounce: 0.4 }}
-          >
-            <span className="inline-block py-2 px-5 rounded-full bg-white/10 text-cyan-300 font-bold text-xs mb-6 uppercase tracking-[0.2em] border border-cyan-400/20 backdrop-blur-sm">
-              Agence NTEMO
-            </span>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, type: "spring" }}
-            className="text-4xl lg:text-5xl xl:text-6xl font-black font-heading tracking-tight mb-8 text-white leading-[1.25]"
-          >
-            Vous avez un projet ? <br className="hidden md:block" />
-            <span className="font-serif italic font-normal text-[#34c4eb] tracking-wide block my-1">
-              Notre expertise
-            </span>
-            est à votre service.
-          </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-lg md:text-xl text-slate-300 mb-10 max-w-lg leading-relaxed font-medium"
-          >
-            Nous bousculons les codes de la communication et du marketing pour propulser votre entreprise vers de nouveaux sommets.
-          </motion.p>
-
-          <motion.a
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+        {/* Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex flex-col sm:flex-row items-center gap-4 mb-16 w-full justify-center"
+        >
+          <a
             href="#contact"
-            className="relative overflow-hidden group flex items-center gap-4 bg-[#34c4eb] text-slate-900 px-10 py-5 rounded-full font-bold text-lg shadow-2xl hover:shadow-[#34c4eb]/40 transition-all"
+            className="px-8 py-4 bg-gradient-to-r from-[#34c4eb] to-[#2488cd] text-white rounded-full font-black text-sm hover:from-[#2488cd] hover:to-[#34c4eb] transition-all shadow-[0_0_30px_rgba(52,196,235,0.45)] hover:shadow-[0_0_40px_rgba(52,196,235,0.65)] w-full sm:w-auto hover:scale-105 transform duration-200"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <span className="relative z-10">Contactez-nous</span>
-            <ArrowRight size={22} className="relative z-10 group-hover:translate-x-2 transition-transform duration-300" />
-          </motion.a>
-        </div>
+            Démarrer maintenant
+          </a>
+          <a
+            href="#services"
+            className="px-8 py-4 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-white/20 hover:border-white/40 hover:gap-3 transition-all w-full sm:w-auto shadow-lg"
+          >
+            Voir nos services <ArrowRight size={16} />
+          </a>
+        </motion.div>
 
-        {/* Right Part: Dynamic ZigZag Image Gallery */}
-        <div className="w-full lg:w-7/12 h-[500px] md:h-[700px] relative z-20">
-          
-          {/* Image 1: Top Left (Zig) */}
-          <div className="absolute top-[5%] left-[5%] w-[50%] h-[50%] z-20">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={displayImages[0]}
-                initial={{ opacity: 0, x: -50, y: -50, rotate: -15, scale: 0.8 }}
-                animate={{ opacity: 1, x: 0, y: 0, rotate: -6, scale: 1 }}
-                exit={{ opacity: 0, filter: "blur(10px)", scale: 1.1 }}
-                transition={{ duration: 0.8, type: "spring" }}
-                className="w-full h-full rounded-[2rem] overflow-hidden shadow-2xl border-[3px] border-white/20 backdrop-blur-sm"
-              >
-                <img src={displayImages[0]} className="w-full h-full object-cover" alt="Gallery 1" />
-              </motion.div>
-            </AnimatePresence>
+        {/* Features Strip */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-xs sm:text-sm text-slate-300 font-medium mb-10"
+        >
+          <div className="flex items-center gap-2">
+            <Clock size={16} className="text-[#34c4eb]" />
+            Livraison rapide
           </div>
-
-          {/* Image 2: Middle Right (Zag) */}
-          <div className="absolute top-[25%] right-[5%] w-[55%] h-[55%] z-30">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={displayImages[1]}
-                initial={{ opacity: 0, x: 50, rotate: 15, scale: 0.8 }}
-                animate={{ opacity: 1, x: 0, rotate: 8, scale: 1 }}
-                exit={{ opacity: 0, filter: "blur(10px)", scale: 1.1 }}
-                transition={{ duration: 0.8, type: "spring", delay: 0.1 }}
-                className="w-full h-full rounded-[2rem] overflow-hidden shadow-2xl border-[3px] border-white/20 backdrop-blur-sm"
-              >
-                <img src={displayImages[1]} className="w-full h-full object-cover" alt="Gallery 2" />
-              </motion.div>
-            </AnimatePresence>
+          <div className="flex items-center gap-2">
+            <CreditCard size={16} className="text-[#34c4eb]" />
+            Tarification transparente
           </div>
-
-          {/* Image 3: Bottom Left (Zig) */}
-          <div className="absolute bottom-[5%] left-[15%] w-[45%] h-[45%] z-10">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={displayImages[2]}
-                initial={{ opacity: 0, y: 50, rotate: -15, scale: 0.8 }}
-                animate={{ opacity: 1, y: 0, rotate: -4, scale: 1 }}
-                exit={{ opacity: 0, filter: "blur(10px)", scale: 1.1 }}
-                transition={{ duration: 0.8, type: "spring", delay: 0.2 }}
-                className="w-full h-full rounded-[2rem] overflow-hidden shadow-2xl border-[3px] border-white/20 backdrop-blur-sm"
-              >
-                <img src={displayImages[2]} className="w-full h-full object-cover" alt="Gallery 3" />
-              </motion.div>
-            </AnimatePresence>
+          <div className="flex items-center gap-2">
+            <ShieldCheck size={16} className="text-[#34c4eb]" />
+            Garantie de qualité
           </div>
-
-        </div>
+        </motion.div>
 
       </div>
+
+      {/* Fluid 3D Element Image & Laptop Mockup */}
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, delay: 0.4 }}
+        className="w-full max-w-6xl mx-auto mt-4 relative z-0 px-4"
+      >
+        <div className="relative rounded-[2rem] overflow-hidden border border-white/5 shadow-[0_0_100px_rgba(36,136,205,0.15)] bg-[#030712]/50 flex flex-col items-center justify-center py-8 md:py-20 min-h-[450px] md:min-h-[500px]">
+          {/* Fluid Background Image acting as environment for the laptop */}
+          <img 
+            src="/fluid-bg.png" 
+            alt="Fluid 3D Design" 
+            className="absolute inset-0 w-full h-full object-cover opacity-80"
+            style={{ maskImage: "linear-gradient(to bottom, black 70%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 70%, transparent 100%)" }}
+          />
+          
+          {/* Laptop Mockup */}
+          <div className="relative z-30 w-full max-w-4xl px-2 sm:px-4 md:px-12 mt-4 mb-20 drop-shadow-2xl">
+            {/* Screen frame - using aspect-[1/1] on mobile to give height, md:aspect-[16/9] on desktop */}
+            <div className="relative w-full aspect-[1/1] sm:aspect-[16/10] md:aspect-[16/9] bg-[#050b14]/90 backdrop-blur-2xl rounded-t-[1.5rem] md:rounded-t-[2rem] border-[6px] md:border-[10px] border-[#1e293b] shadow-2xl overflow-hidden flex flex-col items-center justify-center p-4 sm:p-6 md:p-10 text-center ring-1 ring-white/10">
+               {/* Internal glowing background to simulate screen light */}
+               <div className="absolute inset-0 bg-gradient-to-br from-[#34c4eb]/15 via-transparent to-[#6366f1]/10 pointer-events-none" />
+               
+               <AnimatePresence mode="wait">
+                 <motion.div
+                   key={currentService}
+                   initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+                   animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                   exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
+                   transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
+                   className="flex flex-col items-center justify-center h-full w-full max-w-xl"
+                 >
+                   <div className="mb-4 sm:mb-6 md:mb-8 p-3 sm:p-4 md:p-5 rounded-2xl md:rounded-3xl bg-white/5 border border-white/10 shadow-[0_0_30px_rgba(52,196,235,0.2)] backdrop-blur-md">
+                     {SERVICES[currentService].icon}
+                   </div>
+                   <h3 className="text-xl sm:text-2xl md:text-4xl font-black font-heading text-white mb-2 sm:mb-4 leading-tight tracking-tight">
+                     {SERVICES[currentService].title}
+                   </h3>
+                   <p className="text-slate-300 text-xs sm:text-sm md:text-lg leading-relaxed font-medium px-2 sm:px-4">
+                     {SERVICES[currentService].description}
+                   </p>
+                 </motion.div>
+               </AnimatePresence>
+               
+               {/* Progress indicator inside screen */}
+               <div className="absolute bottom-4 sm:bottom-6 flex gap-1.5 sm:gap-3">
+                 {SERVICES.map((_, idx) => (
+                   <button
+                     key={idx}
+                     onClick={() => setCurrentService(idx)}
+                     className={`h-1 sm:h-1.5 md:h-2 rounded-full transition-all duration-500 cursor-pointer ${idx === currentService ? "w-6 sm:w-8 md:w-12 bg-[#34c4eb] shadow-[0_0_10px_#34c4eb]" : "w-1.5 sm:w-2 md:w-3 bg-white/20 hover:bg-white/40"}`}
+                     aria-label={`Aller au service ${idx + 1}`}
+                   />
+                 ))}
+               </div>
+            </div>
+            {/* Laptop Base */}
+            <div className="relative w-[108%] -left-[4%] h-3 sm:h-4 md:h-6 bg-gradient-to-b from-[#94a3b8] to-[#475569] rounded-b-2xl shadow-2xl flex justify-center border-t border-slate-300">
+              <div className="w-1/4 h-1.5 sm:h-2 md:h-3 bg-[#cbd5e1] rounded-b-md md:rounded-b-lg opacity-50 shadow-inner"></div>
+            </div>
+            {/* Glow under the laptop */}
+            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-3/4 h-10 bg-[#34c4eb]/30 blur-2xl rounded-[100%] pointer-events-none" />
+          </div>
+
+
+        </div>
+      </motion.div>
+      
     </section>
   );
 }

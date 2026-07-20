@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
+import { Target } from "lucide-react";
 
 export default function AboutSection() {
   const containerVariants: Variants = {
@@ -20,7 +20,7 @@ export default function AboutSection() {
   };
 
   return (
-    <section id="about" className="py-24 bg-slate-50 overflow-hidden">
+    <section id="about" className="py-24 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-20 lg:gap-32">
           
@@ -49,16 +49,16 @@ export default function AboutSection() {
               <motion.div
                 animate={{ y: [0, -15, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-8 -left-8 md:-bottom-12 md:-left-12 bg-white px-8 py-6 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] flex flex-col items-center border border-slate-100 z-20"
+                className="absolute -bottom-8 -left-8 md:-bottom-12 md:-left-12 bg-slate-900/60 backdrop-blur-md px-8 py-6 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col items-center border border-white/10 z-20"
               >
                 <div className="bg-[#34c4eb]/10 w-20 h-20 rounded-full flex items-center justify-center mb-3">
-                  <svg width="32" height="40" viewBox="0 0 24 32" fill="black" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="32" height="40" viewBox="0 0 24 32" fill="white" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 0H6.5L17.5 18V0H24V32H17.5L6.5 14V32H0V0Z" />
                   </svg>
                 </div>
-                <div className="flex flex-col items-center">
-                  <span className="text-[16px] font-black leading-none tracking-tighter text-slate-900 uppercase">
-                    Ntémo
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[16px] font-black leading-none tracking-tighter text-white uppercase">
+                    NTEMO
                   </span>
                   <span className="text-[9px] font-bold leading-none tracking-widest text-[#34c4eb] mt-[3px] uppercase">
                     Consulting
@@ -70,12 +70,14 @@ export default function AboutSection() {
               <motion.div
                 animate={{ y: [0, 15, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute top-10 -right-6 md:top-16 md:-right-10 bg-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-100 z-20"
+                className="absolute top-10 -right-6 md:top-16 md:-right-10 bg-slate-900/60 backdrop-blur-md px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-white/10 z-20"
               >
-                <div className="bg-green-100 text-green-600 rounded-full p-1">
-                  <CheckCircle2 size={20} />
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-[#2488cd]">
+                    <Target size={20} />
+                  </div>
+                  <span className="font-bold text-slate-200 text-sm">Stratégie 100% sur mesure</span>
                 </div>
-                <span className="font-bold text-slate-800 text-sm">Stratégie 100% sur mesure</span>
               </motion.div>
 
             </div>
@@ -97,7 +99,7 @@ export default function AboutSection() {
 
             <motion.h3 
               variants={itemVariants}
-              className="text-4xl md:text-6xl font-black text-[#0a192f] mb-8 font-heading leading-[1.25] tracking-tight"
+              className="text-4xl md:text-6xl font-black text-white mb-8 font-heading leading-[1.25] tracking-tight"
             >
               L'excellence stratégique pour votre <br className="hidden md:block"/>
               <span className="font-serif italic font-normal text-[#2488cd] tracking-wide block my-1">
@@ -105,15 +107,15 @@ export default function AboutSection() {
               </span>
             </motion.h3>
 
-            <motion.div variants={itemVariants} className="space-y-6 text-lg text-slate-600 leading-relaxed font-medium">
+            <motion.div variants={itemVariants} className="space-y-6 text-lg text-slate-300 leading-relaxed font-medium">
               <p>
-                <strong className="text-slate-900 font-bold">NTEMO CONSULTING</strong> est une agence de communication et de conseil stratégique dédiée à l'accompagnement des entreprises, institutions et porteurs de projets dans la construction, la valorisation et le développement de leur image de marque.
+                <strong className="text-white font-bold">NTEMO CONSULTING</strong> est une agence de communication et de conseil stratégique dédiée à l'accompagnement des entreprises, institutions et porteurs de projets dans la construction, la valorisation et le développement de leur image de marque.
               </p>
               
               <div className="h-px w-24 bg-gradient-to-r from-[#34c4eb] to-transparent my-4" />
               
               <p>
-                Nous plaçons <span className="text-slate-900 font-bold">l'humain</span>, <span className="text-slate-900 font-bold">la créativité</span> et <span className="text-slate-900 font-bold">la performance</span> au cœur de nos actions pour vous offrir des solutions sur mesure, efficaces et innovantes.
+                Nous plaçons <span className="text-white font-bold">l'humain</span>, <span className="text-white font-bold">la créativité</span> et <span className="text-white font-bold">la performance</span> au cœur de nos actions pour vous offrir des solutions sur mesure, efficaces et innovantes.
               </p>
             </motion.div>
           </motion.div>
