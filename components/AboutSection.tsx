@@ -40,7 +40,7 @@ export default function AboutSection() {
               <div className="absolute inset-0 bg-[#34c4eb] rounded-[2.5rem] -rotate-3 scale-105 opacity-20 -z-10" />
               
               <img 
-                src="https://ntemoconsulting.com/wp-content/uploads/2026/02/IMG-20251017-WA0007.jpg" 
+                src="/image-ntemo.jpg" 
                 alt="NTEMO Consulting" 
                 className="absolute inset-0 w-full h-full object-cover rounded-[2.5rem] shadow-2xl border-8 border-white"
               />

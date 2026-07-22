@@ -1,0 +1,10 @@
+DirectoryIndex index.html
+
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Page 404 personnalisée
+ErrorDocument 404 /404.html

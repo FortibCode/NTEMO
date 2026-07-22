@@ -17,21 +17,21 @@ const REALISATIONS = [
     title: "Application NTEMO Consulting",
     image: "/LOGO-2.jpeg",
   },
-  {
-    slug: "projet-3",
-    title: "Stratégie Digitale NTEMO",
-    image: "/LOGO-3.jpeg",
-  },
-  {
-    slug: "projet-4",
-    title: "Site Web NTEMO",
-    image: "/LOGO-4.jpeg",
-  },
-  {
-    slug: "projet-5",
-    title: "Solution Entreprise NTEMO",
-    image: "/LOGO-5.jpeg",
-  },
+  // {
+  //   slug: "projet-3",
+  //   title: "Stratégie Digitale NTEMO",
+  //   image: "/LOGO-3.jpeg",
+  // },
+  // {
+  //   slug: "projet-4",
+  //   title: "Site Web NTEMO",
+  //   image: "/LOGO-4.jpeg",
+  // },
+  // {
+  //   slug: "projet-5",
+  //   title: "Solution Entreprise NTEMO",
+  //   image: "/LOGO-5.jpeg",
+  // },
 ];
 
 const containerVariants = {

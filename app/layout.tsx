@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   title: "NTEMO Consulting | Communication, Marketing, Stratégie & Conseil",
   description: "Agence spécialisée en Communication, Marketing, Stratégie & Conseil.",
   icons: {
-    icon: "https://ntemoconsulting.com/wp-content/uploads/2026/02/cropped-IMG-20251017-WA0007-180x180.jpg",
+    icon: "/faicon.jpg",
   }
 };
 
