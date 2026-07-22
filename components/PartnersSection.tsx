@@ -1,21 +1,15 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const PARTNERS = [
-  { name: "MTN", abbr: "MTN", color: "#ffcb00" },
-  { name: "Airtel", abbr: "Air", color: "#e40000" },
-  { name: "Orange", abbr: "Org", color: "#ff6600" },
-  { name: "Canal+", abbr: "C+", color: "#00a0e9" },
-  { name: "BGFI Bank", abbr: "BGFI", color: "#005f9e" },
-  { name: "TotalEnergies", abbr: "Total", color: "#ef3b42" },
-  { name: "Azur", abbr: "Azur", color: "#0072ce" },
-  { name: "Bolloré", abbr: "Bol", color: "#003087" },
-  { name: "CCA Bank", abbr: "CCA", color: "#00843d" },
-  { name: "Pana TV", abbr: "Pan", color: "#c0392b" },
+  { name: "Partenaire 1", src: "/partenaire-1.png" },
+  { name: "Partenaire 2", src: "/partenaire-2.png" },
+  { name: "Partenaire 3", src: "/partenaire-3.png" },
 ];
 
-const duplicatedPartners = [...PARTNERS, ...PARTNERS];
+const duplicatedPartners = [...PARTNERS, ...PARTNERS, ...PARTNERS];
 
 export default function PartnersSection() {
   return (
@@ -50,21 +44,20 @@ export default function PartnersSection() {
           {duplicatedPartners.map((partner, index) => (
             <div
               key={index}
-              className="flex items-center gap-3 px-8 md:px-12 cursor-pointer group"
+              className="flex items-center gap-6 px-8 md:px-12 cursor-pointer group shrink-0"
             >
-              {/* Logo icon */}
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center font-black text-sm border border-white/10 bg-white/5 group-hover:border-white/30 transition-all duration-300 shrink-0"
-                style={{ color: partner.color }}
-              >
-                {partner.abbr}
+              {/* Partner logo image */}
+              <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-white/10 bg-white group-hover:border-white/30 transition-all duration-300 shrink-0">
+                <Image
+                  src={partner.src}
+                  alt={partner.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 112px, 128px"
+                />
               </div>
-              {/* Name */}
-              <span className="text-xl md:text-2xl font-black text-white/40 group-hover:text-white tracking-tight whitespace-nowrap transition-colors duration-300">
-                {partner.name}
-              </span>
               {/* Dot separator */}
-              <span className="text-white/20 ml-4 text-2xl">·</span>
+              <span className="text-white/20 text-2xl">·</span>
             </div>
           ))}
         </div>

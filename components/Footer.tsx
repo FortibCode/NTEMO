@@ -33,6 +33,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               {[
                 { name: "FAQ", href: "/#faq" },
+                { name: "Réalisations", href: "/realisations" },
                 { name: "Site Map", href: "/" },
                 { name: "Politique de cookies", href: "/" },
                 { name: "Contact", href: "/#contact" },

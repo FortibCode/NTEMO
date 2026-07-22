@@ -25,6 +25,7 @@ export default function Navbar() {
         { name: "Site Responsive/Mobile", slug: "site-responsive-mobile" }
       ]
     },
+    { name: "Réalisations", href: "/realisations" },
     { name: "FAQ", href: "/#faq" },
     { name: "Formations", href: "/#formations" },
     { name: "Contact", href: "/#contact" },
