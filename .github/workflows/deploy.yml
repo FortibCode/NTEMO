@@ -17,6 +17,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
       - name: Installer les dépendances
         run: npm ci
@@ -24,11 +25,33 @@ jobs:
       - name: Générer le site statique
         run: npm run build
 
+      - name: Vérifier que le build est présent
+        run: |
+          if [ ! -f "./out/index.html" ]; then
+            echo "ERREUR : out/index.html est introuvable. Le build a échoué ou 'output: export' n'est pas activé dans next.config.ts."
+            exit 1
+          fi
+          echo "Build OK, contenu de out/ :"
+          ls -la ./out/
+
       - name: Déployer sur LWS via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
           local-dir: ./out/
           server-dir: ./
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.htaccess
+            **/.user.ini
+            **/.quarantaine/**
+            **/wp-*.php
+            **/xmlrpc.php
+            **/*.sqlite
+            **/backup-*.zip
+            **/.ftp-deploy-sync-state.json
