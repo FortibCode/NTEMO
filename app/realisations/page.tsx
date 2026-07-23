@@ -10,7 +10,7 @@ const REALISATIONS = [
   {
     slug: "projet-1",
     title: "Projet NTEMO Branding",
-    image: "/LOGO-1.png",
+    image: "/LOGO-1-APPLI.png",
   },
   {
     slug: "projet-2",
