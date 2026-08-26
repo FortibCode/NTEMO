@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
 
 export default function Footer() {
@@ -6,21 +7,19 @@ export default function Footer() {
 
   return (
     <footer className="text-slate-400 border-t border-white/5 relative z-10">
-      <div className="container mx-auto px-4 md:px-8 py-16">
+      <div className="container mx-auto px-4 md:px-8 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
 
           {/* Brand Column */}
           <div className="md:col-span-4">
-            <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="bg-slate-900/60 backdrop-blur-md border border-white/10 rounded-xl p-2 flex items-center justify-center">
-                <svg width="22" height="26" viewBox="0 0 24 32" fill="white" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0H6.5L17.5 18V0H24V32H17.5L6.5 14V32H0V0Z" />
-                </svg>
-              </div>
-              <div>
-                <span className="font-black text-xl text-white tracking-tight uppercase">Ntémo</span>
-                <span className="block text-[10px] font-bold tracking-[0.2em] text-[#34c4eb] uppercase">Consulting</span>
-              </div>
+            <Link href="/" className="flex items-center gap-4 mb-6 group">
+              <Image
+                src="/logo-ntemo-rebuilt.png"
+                alt="NTEMO Consulting Logo"
+                width={96}
+                height={96}
+                className="w-20 h-20 md:w-24 md:h-24 object-contain rounded-2xl shadow-lg border border-white/10 group-hover:scale-105 transition-transform"
+              />
             </Link>
             <p className="text-slate-400 leading-relaxed text-sm max-w-xs">
               Nous mettons notre expertise et notre passion à votre service. Que vous soyez novice ou expérimenté, nous collaborons ensemble.

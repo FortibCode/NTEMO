@@ -8,24 +8,28 @@ const teamMembers = [
     role: "CEO FOUNDER, NTEMO CONSULTING",
     quote: "« Dans le vaste univers de la communication, les mots sont des ponts et les idées des voiles ; une entreprise qui sait écouter avant de parler, qui sait créer avant de vendre, et qui sait inspirer avant de convaincre, devient plus qu'une marque : elle devient une voix qui résonne dans le cœur des gens. »",
     image: "/boulankana.jpg",
+    objectPosition: "object-top",
   },
   {
     name: "Edgard BAVOUMINA",
     role: "Directeur des Opérations, NTEMO CONSULTING",
     quote: "« Une entreprise de communication et de marketing, les idées sont des étincelles et les campagnes des flammes, mais sans organisation, elles s'éteignent avant d'éclairer. Le rôle des opérations est de transformer l'inspiration en action, de donner une structure aux rêves et une cadence aux ambitions. »",
     image: "/edgard.jpg",
+    objectPosition: "object-top",
   },
   {
     name: "Gaste Istardi NDOMBA",
     role: "Responsable Commercial, NTEMO CONSULTING",
     quote: "« Le Responsable Commercial est le bâtisseur de ponts entre la vision et le marché. Car vendre ne consiste pas seulement à conclure des contrats, mais à créer des relations durables, à écouter les besoins cachés derrière les mots, et à transformer chaque échange en une promesse tenue. »",
     image: "/gatse.jpg",
+    objectPosition: "object-top",
   },
   {
     name: "Glade NTOLANY",
     role: "Responsable technique et suivis projet, NTEMO CONSULTING",
     quote: "« Le Responsable Technique et Suivi de Projet est le garant de la promesse faite au client. Car piloter un projet ne consiste pas seulement à respecter des délais et des budgets, mais à bâtir des solutions solides, à anticiper les complexités invisibles derrière les lignes de code ou les plans, et à transformer chaque défi technique en une réussite partagée. »",
-    image: "/glade.jpeg",
+    image: "/glade-fixed.jpg",
+    objectPosition: "object-center",
   },
 ];
 
@@ -105,7 +109,7 @@ export default function TeamSection() {
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full object-cover ${member.objectPosition || 'object-top'}`}
                   />
                 </div>
               </div>

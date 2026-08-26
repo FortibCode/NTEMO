@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import Image from "next/image";
 import { Target } from "lucide-react";
 
 export default function AboutSection() {
@@ -39,22 +40,31 @@ export default function AboutSection() {
               <div className="absolute -inset-4 bg-gradient-to-tr from-[#34c4eb] to-[#1e40af] rounded-[3rem] rotate-6 opacity-30 blur-2xl -z-10" />
               <div className="absolute inset-0 bg-[#34c4eb] rounded-[2.5rem] -rotate-3 scale-105 opacity-20 -z-10" />
               
-              <img 
-                src="/image-ntemo.jpg" 
-                alt="NTEMO Consulting" 
-                className="absolute inset-0 w-full h-full object-cover rounded-[2.5rem] shadow-2xl border-8 border-white"
-              />
+              <div className="absolute inset-0 bg-white rounded-[2.5rem] shadow-2xl border-8 border-white flex items-center justify-center p-6 md:p-10 overflow-hidden">
+                <Image 
+                  src="/logo-ntemo-rebuilt.png" 
+                  alt="NTEMO Consulting Logo" 
+                  fill
+                  priority
+                  className="object-contain p-4 md:p-6"
+                  sizes="(max-width: 768px) 300px, 450px"
+                />
+              </div>
 
               {/* Floating Logo Badge */}
               <motion.div
                 animate={{ y: [0, -15, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-8 -left-8 md:-bottom-12 md:-left-12 bg-slate-900/60 backdrop-blur-md px-8 py-6 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col items-center border border-white/10 z-20"
+                className="absolute -bottom-8 -left-8 md:-bottom-12 md:-left-12 bg-slate-900/80 backdrop-blur-md px-8 py-6 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] flex flex-col items-center border border-white/10 z-20"
               >
-                <div className="bg-[#34c4eb]/10 w-20 h-20 rounded-full flex items-center justify-center mb-3">
-                  <svg width="32" height="40" viewBox="0 0 24 32" fill="white" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0H6.5L17.5 18V0H24V32H17.5L6.5 14V32H0V0Z" />
-                  </svg>
+                <div className="w-16 h-16 rounded-2xl overflow-hidden mb-3 border border-white/20 shadow-md flex items-center justify-center p-1 bg-white">
+                  <Image
+                    src="/logo-ntemo-rebuilt.png"
+                    alt="NTEMO Consulting"
+                    width={64}
+                    height={64}
+                    className="w-full h-full object-contain rounded-xl"
+                  />
                 </div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-[16px] font-black leading-none tracking-tighter text-white uppercase">
@@ -91,7 +101,14 @@ export default function AboutSection() {
             viewport={{ once: true, margin: "-100px" }}
             className="w-full lg:w-7/12 flex flex-col items-start text-left"
           >
-            <motion.div variants={itemVariants} className="mb-4">
+            <motion.div variants={itemVariants} className="mb-4 flex items-center gap-3">
+              <Image
+                src="/logo-ntemo.jpg"
+                alt="NTEMO Consulting Logo"
+                width={36}
+                height={36}
+                className="w-9 h-9 object-contain rounded-lg border border-white/10 shadow-md"
+              />
               <span className="inline-block py-2 px-4 rounded-full bg-[#34c4eb]/10 text-[#2488cd] font-bold text-xs uppercase tracking-[0.2em]">
                 Qui sommes-nous ?
               </span>
@@ -109,7 +126,17 @@ export default function AboutSection() {
 
             <motion.div variants={itemVariants} className="space-y-6 text-lg text-slate-300 leading-relaxed font-medium">
               <p>
-                <strong className="text-white font-bold">NTEMO CONSULTING</strong> est une agence de communication et de conseil stratégique dédiée à l'accompagnement des entreprises, institutions et porteurs de projets dans la construction, la valorisation et le développement de leur image de marque.
+                <span className="inline-flex items-center gap-2 mr-1">
+                  <Image
+                    src="/logo-ntemo.jpg"
+                    alt="NTEMO Consulting"
+                    width={28}
+                    height={28}
+                    className="w-7 h-7 inline-block object-contain rounded-md align-sub border border-white/10"
+                  />
+                  <strong className="text-white font-bold ml-1">NTEMO CONSULTING</strong>
+                </span>{" "}
+                est une agence de communication et de conseil stratégique dédiée à l'accompagnement des entreprises, institutions et porteurs de projets dans la construction, la valorisation et le développement de leur image de marque.
               </p>
               
               <div className="h-px w-24 bg-gradient-to-r from-[#34c4eb] to-transparent my-4" />

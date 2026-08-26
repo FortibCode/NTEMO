@@ -5,11 +5,17 @@ import { motion } from "framer-motion";
 
 const PARTNERS = [
   { name: "Partenaire 1", src: "/partenaire-1.png" },
-  { name: "Partenaire 2", src: "/partenaire-2.png" },
-  { name: "Partenaire 3", src: "/partenaire-3.png" },
+  { name: "KONGO Express", src: "/partenaire-2.png", isFull: true },
+  { name: "Omya Capital", src: "/omya-capital.jpeg" },
+  { name: "Omya Invest", src: "/omya-invest.jpeg" },
 ];
 
-const duplicatedPartners = [...PARTNERS, ...PARTNERS, ...PARTNERS];
+const duplicatedPartners = [
+  ...PARTNERS,
+  ...PARTNERS,
+  ...PARTNERS,
+  ...PARTNERS,
+];
 
 export default function PartnersSection() {
   return (
@@ -44,16 +50,16 @@ export default function PartnersSection() {
           {duplicatedPartners.map((partner, index) => (
             <div
               key={index}
-              className="flex items-center gap-6 px-8 md:px-12 cursor-pointer group shrink-0"
+              className="flex items-center gap-8 px-6 md:px-10 cursor-pointer group shrink-0"
             >
               {/* Partner logo image */}
-              <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-white/10 bg-white group-hover:border-white/30 transition-all duration-300 shrink-0">
+              <div className={`relative w-48 h-24 md:w-56 md:h-28 rounded-2xl overflow-hidden border border-white/10 bg-white shadow-lg group-hover:border-[#34c4eb]/50 group-hover:shadow-[0_0_25px_rgba(52,196,235,0.25)] transition-all duration-300 flex items-center justify-center shrink-0 ${partner.isFull ? "p-0" : "p-3"}`}>
                 <Image
                   src={partner.src}
                   alt={partner.name}
                   fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 112px, 128px"
+                  className={`group-hover:scale-105 transition-transform duration-300 ${partner.isFull ? "object-fill p-0" : "object-contain p-2"}`}
+                  sizes="(max-width: 768px) 192px, 224px"
                 />
               </div>
               {/* Dot separator */}

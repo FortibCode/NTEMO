@@ -145,10 +145,10 @@ export default function HeroSection() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.4 }}
-        className="w-full max-w-6xl mx-auto mt-4 relative z-0 px-4"
+        className="w-full max-w-6xl mx-auto mt-4 relative z-0 px-3 sm:px-4 md:px-6"
       >
-        <div className="relative rounded-[2rem] overflow-hidden border border-white/5 shadow-[0_0_100px_rgba(36,136,205,0.15)] bg-[#030712]/50 flex flex-col items-center justify-center py-8 md:py-20 min-h-[450px] md:min-h-[500px]">
-          {/* Fluid Background Image acting as environment for the laptop */}
+        <div className="relative rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-white/5 shadow-[0_0_100px_rgba(36,136,205,0.15)] bg-[#030712]/50 flex flex-col items-center justify-center py-6 sm:py-10 md:py-20 min-h-[380px] sm:min-h-[450px] md:min-h-[500px]">
+          {/* Fluid Background Image */}
           <img 
             src="/fluid-bg.png" 
             alt="Fluid 3D Design" 
@@ -157,10 +157,10 @@ export default function HeroSection() {
           />
           
           {/* Laptop Mockup */}
-          <div className="relative z-30 w-full max-w-4xl px-2 sm:px-4 md:px-12 mt-4 mb-20 drop-shadow-2xl">
-            {/* Screen frame - using aspect-[1/1] on mobile to give height, md:aspect-[16/9] on desktop */}
-            <div className="relative w-full aspect-[1/1] sm:aspect-[16/10] md:aspect-[16/9] bg-[#050b14]/90 backdrop-blur-2xl rounded-t-[1.5rem] md:rounded-t-[2rem] border-[6px] md:border-[10px] border-[#1e293b] shadow-2xl overflow-hidden flex flex-col items-center justify-center p-4 sm:p-6 md:p-10 text-center ring-1 ring-white/10">
-               {/* Internal glowing background to simulate screen light */}
+          <div className="relative z-30 w-full max-w-xs sm:max-w-2xl md:max-w-4xl px-2 sm:px-4 md:px-12 mt-2 sm:mt-4 mb-14 sm:mb-20 drop-shadow-2xl mx-auto">
+            {/* Screen frame */}
+            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] bg-[#050b14]/90 backdrop-blur-2xl rounded-t-[1.25rem] sm:rounded-t-[1.5rem] md:rounded-t-[2rem] border-[4px] sm:border-[6px] md:border-[10px] border-[#1e293b] shadow-2xl overflow-hidden flex flex-col items-center justify-center p-3 sm:p-6 md:p-10 text-center ring-1 ring-white/10">
+               {/* Internal glow */}
                <div className="absolute inset-0 bg-gradient-to-br from-[#34c4eb]/15 via-transparent to-[#6366f1]/10 pointer-events-none" />
                
                <AnimatePresence mode="wait">
@@ -172,39 +172,37 @@ export default function HeroSection() {
                    transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
                    className="flex flex-col items-center justify-center h-full w-full max-w-xl"
                  >
-                   <div className="mb-4 sm:mb-6 md:mb-8 p-3 sm:p-4 md:p-5 rounded-2xl md:rounded-3xl bg-white/5 border border-white/10 shadow-[0_0_30px_rgba(52,196,235,0.2)] backdrop-blur-md">
+                   <div className="mb-3 sm:mb-5 md:mb-8 p-2.5 sm:p-4 md:p-5 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/5 border border-white/10 shadow-[0_0_30px_rgba(52,196,235,0.2)] backdrop-blur-md">
                      {SERVICES[currentService].icon}
                    </div>
-                   <h3 className="text-xl sm:text-2xl md:text-4xl font-black font-heading text-white mb-2 sm:mb-4 leading-tight tracking-tight">
+                   <h3 className="text-lg sm:text-2xl md:text-4xl font-black font-heading text-white mb-1.5 sm:mb-3 md:mb-4 leading-tight tracking-tight">
                      {SERVICES[currentService].title}
                    </h3>
-                   <p className="text-slate-300 text-xs sm:text-sm md:text-lg leading-relaxed font-medium px-2 sm:px-4">
+                   <p className="text-slate-300 text-[11px] sm:text-sm md:text-lg leading-relaxed font-medium px-1 sm:px-4">
                      {SERVICES[currentService].description}
                    </p>
                  </motion.div>
                </AnimatePresence>
                
-               {/* Progress indicator inside screen */}
-               <div className="absolute bottom-4 sm:bottom-6 flex gap-1.5 sm:gap-3">
+               {/* Progress indicator */}
+               <div className="absolute bottom-3 sm:bottom-5 md:bottom-6 flex gap-1 sm:gap-2 md:gap-3">
                  {SERVICES.map((_, idx) => (
                    <button
                      key={idx}
                      onClick={() => setCurrentService(idx)}
-                     className={`h-1 sm:h-1.5 md:h-2 rounded-full transition-all duration-500 cursor-pointer ${idx === currentService ? "w-6 sm:w-8 md:w-12 bg-[#34c4eb] shadow-[0_0_10px_#34c4eb]" : "w-1.5 sm:w-2 md:w-3 bg-white/20 hover:bg-white/40"}`}
+                     className={`h-1 sm:h-1.5 md:h-2 rounded-full transition-all duration-500 cursor-pointer ${idx === currentService ? "w-5 sm:w-8 md:w-12 bg-[#34c4eb] shadow-[0_0_10px_#34c4eb]" : "w-1.5 sm:w-2 md:w-3 bg-white/20 hover:bg-white/40"}`}
                      aria-label={`Aller au service ${idx + 1}`}
                    />
                  ))}
                </div>
             </div>
             {/* Laptop Base */}
-            <div className="relative w-[108%] -left-[4%] h-3 sm:h-4 md:h-6 bg-gradient-to-b from-[#94a3b8] to-[#475569] rounded-b-2xl shadow-2xl flex justify-center border-t border-slate-300">
+            <div className="relative w-[108%] -left-[4%] h-2.5 sm:h-4 md:h-6 bg-gradient-to-b from-[#94a3b8] to-[#475569] rounded-b-xl sm:rounded-b-2xl shadow-2xl flex justify-center border-t border-slate-300">
               <div className="w-1/4 h-1.5 sm:h-2 md:h-3 bg-[#cbd5e1] rounded-b-md md:rounded-b-lg opacity-50 shadow-inner"></div>
             </div>
             {/* Glow under the laptop */}
-            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-3/4 h-10 bg-[#34c4eb]/30 blur-2xl rounded-[100%] pointer-events-none" />
+            <div className="absolute -bottom-8 sm:-bottom-10 left-1/2 -translate-x-1/2 w-3/4 h-8 sm:h-10 bg-[#34c4eb]/30 blur-2xl rounded-[100%] pointer-events-none" />
           </div>
-
-
         </div>
       </motion.div>
       
