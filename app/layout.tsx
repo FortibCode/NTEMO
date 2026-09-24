@@ -23,7 +23,10 @@ export const metadata: Metadata = {
   description: "Agence spécialisée en Communication, Marketing, Stratégie & Conseil.",
   icons: {
     icon: "/faicon.jpg",
-  }
+  },
+  verification: {
+    google: "kDvQ4A9hKN98xyYml-2urUTXO-68S7Rzi3sb6fY0Mqk",
+  },
 };
 
 export default function RootLayout({
