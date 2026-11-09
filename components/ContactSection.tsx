@@ -80,7 +80,7 @@ export default function ContactSection() {
             transition={{ delay: 0.2 }}
             className="text-lg text-slate-200"
           >
-            Contactez notre équipe dès aujourd'hui. Nous sommes disponibles par téléphone ou sur WhatsApp pour une réponse rapide.
+            Contactez notre équipe dès aujourd&apos;hui. Nous sommes disponibles par téléphone ou sur WhatsApp pour une réponse rapide.
           </motion.p>
         </div>
 
