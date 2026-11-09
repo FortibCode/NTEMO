@@ -1,182 +1,197 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useCallback, useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
-import { Share2, Smartphone, Search, BarChart2, Globe, Layers, Layout } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
+import { servicesData } from "@/app/services/[slug]/services-data";
 
-const services = [
-  {
-    icon: <Share2 className="w-7 h-7" />,
-    title: "Publicité Réseaux Sociaux",
-    description: "Des campagnes percutantes sur Facebook, Instagram, TikTok et LinkedIn pour booster votre visibilité et générer des leads qualifiés.",
-    color: "from-[#34c4eb] to-[#2488cd]",
-    slug: "publicite-reseaux-sociaux",
-  },
-  {
-    icon: <Layers className="w-7 h-7" />,
-    title: "Animation Page Pro",
-    description: "Gestion et animation professionnelle de vos pages d'entreprise pour bâtir une communauté engagée et fidèle.",
-    color: "from-[#6366f1] to-[#8b5cf6]",
-    slug: "animation-page-pro",
-  },
-  {
-    icon: <Search className="w-7 h-7" />,
-    title: "Référencement Naturel (SEO)",
-    description: "Optimisez votre positionnement sur Google pour attirer un trafic qualifié et durable sans dépenser en publicité.",
-    color: "from-[#10b981] to-[#34d399]",
-    slug: "referencement-naturel-seo",
-  },
-  {
-    icon: <BarChart2 className="w-7 h-7" />,
-    title: "Google AdWords",
-    description: "Des campagnes Google Ads ciblées et rentables pour apparaître en tête des résultats au bon moment.",
-    color: "from-[#f59e0b] to-[#fbbf24]",
-    slug: "google-adwords",
-  },
-  {
-    icon: <Globe className="w-7 h-7" />,
-    title: "Création Site Web",
-    description: "Des sites web modernes, rapides et sur mesure qui convertissent vos visiteurs en clients.",
-    color: "from-[#ec4899] to-[#f43f5e]",
-    slug: "creation-site-web",
-  },
-  {
-    icon: <Smartphone className="w-7 h-7" />,
-    title: "Création Application Mobile",
-    description: "Développement d'applications iOS et Android ergonomiques pour répondre aux besoins de vos utilisateurs.",
-    color: "from-[#34c4eb] to-[#6366f1]",
-    slug: "creation-application-mobile",
-  },
-  {
-    icon: <Layout className="w-7 h-7" />,
-    title: "Site Responsive/Mobile",
-    description: "Des interfaces web parfaitement adaptées à tous les écrans pour une expérience utilisateur optimale.",
-    color: "from-[#10b981] to-[#34c4eb]",
-    slug: "site-responsive-mobile",
-  },
+// Headline split: bold italic part + light part, as in the reference design
+const slides: { slug: string; strong: string; light: string }[] = [
+  { slug: "publicite-reseaux-sociaux", strong: "Publicité", light: "Réseaux Sociaux" },
+  { slug: "animation-page-pro", strong: "Animation", light: "Page Pro" },
+  { slug: "referencement-naturel-seo", strong: "Référencement", light: "Naturel (SEO)" },
+  { slug: "google-adwords", strong: "Google", light: "AdWords" },
+  { slug: "creation-site-web", strong: "Création", light: "Site Web" },
+  { slug: "creation-application-mobile", strong: "Application", light: "Mobile" },
+  { slug: "site-responsive-mobile", strong: "Site", light: "Responsive/Mobile" },
+  { slug: "conseil-financier", strong: "Conseil", light: "Financier" },
 ];
 
-// Cards arrive alternately from left and right with a rotation and spring effect
-const getZigzagVariant = (index: number) => ({
-  hidden: {
-    opacity: 0,
-    x: index % 2 === 0 ? -150 : 150,
-    y: 30,
-    rotate: index % 2 === 0 ? -10 : 10,
-    scale: 0.85,
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    rotate: 0,
-    scale: 1,
-    transition: {
-      duration: 0.75,
-      delay: Math.floor(index / 2) * 0.18,
-      type: "spring" as const,
-      bounce: 0.35,
-    },
-  },
-});
+const AUTOPLAY_MS = 7000;
+
+const imageVariants = {
+  enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 60 : -60, scale: 1.05 }),
+  center: { opacity: 1, x: 0, scale: 1 },
+  exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -60 : 60, scale: 1.05 }),
+};
+
+const textVariants = {
+  enter: (dir: number) => ({ opacity: 0, y: dir > 0 ? 24 : -24 }),
+  center: { opacity: 1, y: 0 },
+  exit: (dir: number) => ({ opacity: 0, y: dir > 0 ? -24 : 24 }),
+};
 
 export default function ServicesSection() {
+  const [[index, direction], setSlide] = useState<[number, number]>([0, 0]);
+  const [paused, setPaused] = useState(false);
+
+  const paginate = useCallback((dir: number) => {
+    setSlide(([i]) => [(i + dir + slides.length) % slides.length, dir]);
+  }, []);
+
+  const goTo = (i: number) => setSlide(([cur]) => [i, i > cur ? 1 : -1]);
+
+  useEffect(() => {
+    if (paused) return;
+    const id = setTimeout(() => paginate(1), AUTOPLAY_MS);
+    return () => clearTimeout(id);
+  }, [index, paused, paginate]);
+
+  const slide = slides[index];
+  const data = servicesData[slide.slug];
+
   return (
     <section id="services" className="py-24 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
 
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="inline-block py-2 px-4 rounded-full bg-[#34c4eb]/10 text-[#34c4eb] font-bold text-xs uppercase tracking-[0.2em] mb-4"
-          >
-            Nos Services
-          </motion.span>
+        <div className="text-center max-w-3xl mx-auto mb-14">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black font-heading text-white mb-5 leading-tight"
+            transition={{ duration: 0.5 }}
+            className="text-4xl md:text-5xl font-black font-heading text-white mb-5 leading-tight uppercase"
           >
-            Nos Services{" "}
-            <span className="font-serif italic font-normal text-[#34c4eb] tracking-wide">
-              d'Expertise
-            </span>
+            Nos Services
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="text-lg text-slate-300"
           >
             Chez NTEMO Consulting, nous activons les leviers stratégiques essentiels pour propulser votre entreprise et la faire briller dans un marché hautement concurrentiel.
           </motion.p>
         </div>
 
-        {/* ZigZag Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {services.map((service, index) => (
-            <Link 
-              key={index}
-              href={`/services/${service.slug}`}
-              className={`block ${index % 2 !== 0 ? "md:mt-8" : ""}`}
-            >
-              <motion.div
-                variants={getZigzagVariant(index)}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-60px" }}
-                whileHover={{
-                  y: -10,
-                  scale: 1.03,
-                  transition: { duration: 0.2, type: "spring", bounce: 0.5 },
-                }}
-                className="group relative overflow-hidden rounded-3xl p-8 border border-white/10 hover:border-white/25 bg-white/[0.04] cursor-pointer h-full"
+        {/* Carousel */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7 }}
+          className="relative max-w-6xl mx-auto"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          aria-roledescription="carousel"
+          aria-label="Nos services"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 lg:h-[520px] overflow-hidden">
+
+            {/* Left: photo + headline */}
+            <div className="relative h-[320px] sm:h-[400px] lg:h-full overflow-hidden bg-slate-900">
+              <AnimatePresence initial={false} custom={direction}>
+                <motion.div
+                  key={slide.slug}
+                  custom={direction}
+                  variants={imageVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  className="absolute inset-0"
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.2}
+                  onDragEnd={(_, info) => {
+                    if (info.offset.x < -80) paginate(1);
+                    else if (info.offset.x > 80) paginate(-1);
+                  }}
+                >
+                  <Image
+                    src={data.image.replace("w=800", "w=1400")}
+                    alt={data.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover pointer-events-none"
+                    priority={index === 0}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
+                  <h3 className="absolute left-8 md:left-14 right-8 bottom-10 md:bottom-16 text-3xl md:text-[2.6rem] leading-tight text-white font-heading uppercase">
+                    <span className="font-black italic">{slide.strong}</span>{" "}
+                    <span className="font-light">{slide.light}</span>
+                  </h3>
+                </motion.div>
+              </AnimatePresence>
+
+              <button
+                type="button"
+                onClick={() => paginate(-1)}
+                aria-label="Service précédent"
+                className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-10 p-2 text-white/90 hover:text-white hover:scale-110 transition-transform"
               >
-                {/* Gradient glow overlay on hover */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-[0.12] transition-opacity duration-500 rounded-3xl`}
-                />
+                <ChevronLeft size={34} strokeWidth={2.5} />
+              </button>
+            </div>
 
-                {/* Corner accent dot */}
-                <div
-                  className={`absolute top-5 right-5 w-2.5 h-2.5 rounded-full bg-gradient-to-br ${service.color} opacity-40 group-hover:opacity-100 group-hover:scale-[2] transition-all duration-500`}
-                />
-
-                <div className="flex items-start gap-6 relative z-10">
-                  {/* Colored icon block */}
-                  <motion.div
-                    whileHover={{ rotate: [0, -12, 12, -6, 0] }}
-                    transition={{ duration: 0.5 }}
-                    className={`flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} text-white flex items-center justify-center shadow-xl`}
+            {/* Right: description panel */}
+            <div className="relative bg-[#2b4c8c] flex items-center px-8 sm:px-12 lg:pl-16 lg:pr-20 py-12 lg:py-0 min-h-[300px]">
+              <AnimatePresence mode="wait" initial={false} custom={direction}>
+                <motion.div
+                  key={slide.slug}
+                  custom={direction}
+                  variants={textVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.45, ease: "easeOut" }}
+                >
+                  <p className="text-white/90 text-base md:text-[17px] leading-relaxed mb-8">
+                    {data.description}
+                  </p>
+                  <Link
+                    href={`/services/${slide.slug}`}
+                    className="group inline-flex items-center gap-3 rounded-full border border-white/80 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white transition-colors duration-300 hover:bg-white hover:text-[#2b4c8c]"
                   >
-                    {service.icon}
-                  </motion.div>
+                    <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:rotate-45" />
+                    En savoir plus
+                  </Link>
+                </motion.div>
+              </AnimatePresence>
 
-                  <div className="flex-1 pt-1">
-                    <h3 className="text-xl font-black text-white mb-2 font-heading leading-tight">
-                      {service.title}
-                    </h3>
-                    <p className="text-slate-300 leading-relaxed text-sm">
-                      {service.description}
-                    </p>
-                  </div>
-                </div>
+              <button
+                type="button"
+                onClick={() => paginate(1)}
+                aria-label="Service suivant"
+                className="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-10 p-2 text-white/90 hover:text-white hover:scale-110 transition-transform"
+              >
+                <ChevronRight size={34} strokeWidth={2.5} />
+              </button>
+            </div>
+          </div>
 
-                {/* Animated bottom line that sweeps on hover */}
-                <div
-                  className={`absolute bottom-0 left-0 h-[3px] bg-gradient-to-r ${service.color} w-0 group-hover:w-full transition-all duration-500 ease-out rounded-b-3xl`}
+          {/* Pagination */}
+          <div className="flex items-center justify-center mt-8">
+            <div className="flex items-center gap-2">
+              {slides.map((s, i) => (
+                <button
+                  key={s.slug}
+                  type="button"
+                  onClick={() => goTo(i)}
+                  aria-label={`Afficher ${servicesData[s.slug].title}`}
+                  aria-current={i === index}
+                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                    i === index ? "w-10 bg-[#34c4eb]" : "w-3 bg-white/20 hover:bg-white/40"
+                  }`}
                 />
-              </motion.div>
-            </Link>
-          ))}
-        </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
 
       </div>
     </section>

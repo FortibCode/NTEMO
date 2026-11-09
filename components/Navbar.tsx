@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const FacebookIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -44,155 +46,163 @@ const SOCIAL_LINKS = [
   },
 ];
 
-export default function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+const NAV_LINKS = [
+  { name: "Accueil", href: "/" },
+  { name: "À Propos", href: "/#about" },
+  { name: "Mission & Valeurs", href: "/mission-valeurs" },
+  { name: "Équipe", href: "/#equipe" },
+  { name: "Nos Services", href: "/#services" },
+  { name: "Réalisations", href: "/realisations" },
+  { name: "Formations", href: "/formations" },
+  { name: "Partenaires", href: "/partenaires" },
+  { name: "FAQ", href: "/faq" },
+  { name: "Contact", href: "/contact" },
+];
 
-  const navLinks = [
-    { name: "Accueil", href: "/" },
-    { name: "À Propos", href: "/#about" },
-    { 
-      name: "Nos Services", 
-      href: "/#services",
-      dropdown: [
-        { name: "Publicité Réseaux Sociaux", slug: "publicite-reseaux-sociaux" },
-        { name: "Animation Page Pro", slug: "animation-page-pro" },
-        { name: "Référencement Naturel (SEO)", slug: "referencement-naturel-seo" },
-        { name: "Google AdWords", slug: "google-adwords" },
-        { name: "Création Site Web", slug: "creation-site-web" },
-        { name: "Création Application Mobile", slug: "creation-application-mobile" },
-        { name: "Site Responsive/Mobile", slug: "site-responsive-mobile" }
-      ]
-    },
-    { name: "Réalisations", href: "/realisations" },
-    { name: "FAQ", href: "/#faq" },
-    { name: "Formations", href: "/#formations" },
-    { name: "Contact", href: "/#contact" },
-  ];
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname() || "/";
+
+  // Transparent over the hero, solid once the page is scrolled
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Lock page scroll and close on Escape while the menu is open
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setIsOpen(false);
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  const close = () => setIsOpen(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/60 text-white backdrop-blur-md border-b border-slate-100/10 shadow-sm transition-all duration-300">
-      <div className="w-full px-8 md:px-24 flex items-center justify-between py-4 md:py-5">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3.5 group">
-          <Image
-            src="/logo-ntemo-rebuilt.png"
-            alt="NTEMO Consulting"
-            width={80}
-            height={80}
-            className="w-16 h-16 md:w-20 md:h-20 object-contain rounded-2xl shadow-lg border border-white/10 group-hover:scale-105 transition-transform"
-          />
-        </Link>
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 text-white transition-all duration-500 ${
+          isScrolled ? "bg-white shadow-md" : "bg-white"
+        }`}
+      >
+        <div
+          className={`container mx-auto px-6 md:px-10 lg:px-20 flex items-center justify-between transition-all duration-500 ${
+            isScrolled ? "py-2" : "py-3 md:py-4"
+          }`}
+        >
+          {/* Logo */}
+          <Link href="/" onClick={close} className="flex items-center group" aria-label="NTEMO Consulting, accueil">
+            <Image
+              src="/logo-ntemo-officiel.svg"
+              alt="NTEMO Consulting"
+              width={142}
+              height={112}
+              priority
+              className={`w-auto transition-all duration-500 group-hover:scale-105 ${
+                isScrolled ? "h-11 md:h-12" : "h-12 md:h-16"
+              }`}
+            />
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6 lg:gap-8">
-          {navLinks.map((link) => (
-            <div 
-              key={link.name} 
-              className="relative group"
-              onMouseEnter={() => link.dropdown && setIsDropdownOpen(true)}
-              onMouseLeave={() => link.dropdown && setIsDropdownOpen(false)}
+          {/* Menu toggle */}
+          <button
+            type="button"
+            onClick={() => setIsOpen((v) => !v)}
+            aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={isOpen}
+            aria-controls="main-menu"
+            className="p-2 -mr-2 text-[#0a1d6e] hover:text-[#2488cd] transition-colors"
+          >
+            {isOpen ? <X size={30} strokeWidth={2} /> : <Menu size={30} strokeWidth={2} />}
+          </button>
+        </div>
+      </header>
+
+      {/* Side drawer menu (opens from the left) */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={close}
+              className="fixed inset-0 z-[60] bg-black/50"
+              aria-hidden="true"
+            />
+            <motion.aside
+              key="drawer"
+              id="main-menu"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Menu"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "tween", duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed top-0 left-0 bottom-0 z-[70] w-full max-w-[420px] bg-white shadow-2xl overflow-y-auto flex flex-col"
             >
-              <Link
-                href={link.href}
-                className="flex items-center gap-1 text-[14px] font-semibold text-slate-300 hover:text-white transition-colors py-4"
-              >
-                {link.name}
-                {link.dropdown && <ChevronDown size={14} className="mt-[2px]" />}
-              </Link>
-              
-              {/* Dropdown Menu */}
-              {link.dropdown && isDropdownOpen && (
-                <div className="absolute top-full left-0 bg-slate-900/90 border border-slate-100/10 shadow-xl py-4 min-w-[260px] flex flex-col z-50 rounded-2xl backdrop-blur-md">
-                  {link.dropdown.map((item, idx) => (
-                    <Link
-                      key={idx}
-                      href={`/services/${item.slug}`}
-                      className="px-6 py-3 text-[14px] font-semibold text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+              <div className="flex justify-end px-6 pt-6">
+                <button
+                  type="button"
+                  onClick={close}
+                  aria-label="Fermer le menu"
+                  className="p-2 -mr-2 text-[#0a1d6e] hover:text-[#2488cd] transition-colors"
+                >
+                  <X size={26} strokeWidth={2.5} />
+                </button>
+              </div>
+
+              <nav aria-label="Menu principal" className="flex-1 flex flex-col justify-center px-10 py-10">
+                <ul className="space-y-5">
+                  {NAV_LINKS.map((link) => {
+                    const active = link.href === pathname || link.href === pathname.replace(/\/$/, "");
+                    return (
+                      <li key={link.name}>
+                        <Link
+                          href={link.href}
+                          onClick={close}
+                          aria-current={active ? "page" : undefined}
+                          className={`text-[17px] transition-colors ${
+                            active ? "text-[#2488cd] font-semibold" : "text-slate-800 hover:text-[#2488cd]"
+                          }`}
+                        >
+                          {link.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+
+                <div className="flex items-center gap-2.5 mt-12">
+                  {SOCIAL_LINKS.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      className="w-7 h-7 rounded-full bg-[#0a1d6e] text-white flex items-center justify-center hover:bg-[#2488cd] transition-colors [&_svg]:w-3.5 [&_svg]:h-3.5"
                     >
-                      {item.name}
-                    </Link>
+                      {social.icon}
+                    </a>
                   ))}
                 </div>
-              )}
-            </div>
-          ))}
-        </nav>
-
-        {/* Social Links - Desktop */}
-        <div className="hidden md:flex items-center gap-2">
-          {SOCIAL_LINKS.map((social) => (
-            <a
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={social.label}
-              className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300 hover:scale-110 ${social.className}`}
-            >
-              {social.icon}
-            </a>
-          ))}
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden p-2 text-white hover:text-[#34c4eb]"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {/* Mobile Navigation */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-md shadow-xl border-t border-slate-100/10 flex flex-col py-2 rounded-b-2xl">
-          {navLinks.map((link) => (
-            <div key={link.name}>
-              {link.dropdown ? (
-                <>
-                  <button
-                    onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
-                    className="w-full flex items-center justify-between px-6 py-4 text-slate-200 font-semibold border-b border-white/10 hover:text-white transition-colors text-left"
-                  >
-                    <span>{link.name}</span>
-                    <ChevronDown 
-                      size={16} 
-                      className={`transform transition-transform duration-200 ${isMobileServicesOpen ? "rotate-180 text-[#2488cd]" : ""}`} 
-                    />
-                  </button>
-                  {isMobileServicesOpen && (
-                    <div className="bg-slate-900/50 flex flex-col py-2 border-b border-slate-100/10">
-                      {link.dropdown.map((item, idx) => (
-                        <Link
-                          key={idx}
-                          href={`/services/${item.slug}`}
-                          onClick={() => {
-                            setIsMobileMenuOpen(false);
-                            setIsMobileServicesOpen(false);
-                          }}
-                          className="px-10 py-3 text-[14px] font-medium text-slate-400 hover:text-white transition-colors"
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <Link
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-6 py-4 text-slate-200 font-semibold border-b border-white/10 hover:text-white transition-colors"
-                >
-                  {link.name}
-                </Link>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-    </header>
+              </nav>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

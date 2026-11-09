@@ -125,3 +125,11 @@ body::after {
 .animate-infinite-scroll-reverse:hover {
   animation-play-state: paused;
 }
+
+/* Keep anchored sections clear of the fixed navbar */
+html {
+  scroll-behavior: smooth;
+}
+section[id] {
+  scroll-margin-top: 96px;
+}

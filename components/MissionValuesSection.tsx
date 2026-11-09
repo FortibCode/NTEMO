@@ -1,137 +1,149 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { Ear, Palette, Shield, Target, Handshake } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { slideIn } from "@/components/splitMotion";
+import { ArrowUpRight, Ear, Palette, Shield, Target, Handshake } from "lucide-react";
 
 const values = [
   {
-    icon: <Ear className="w-6 h-6" />,
+    icon: Ear,
     title: "Écoute",
     description: "Comprendre vos besoins pour mieux vous accompagner.",
-    color: "from-[#34c4eb] to-[#2488cd]",
   },
   {
-    icon: <Palette className="w-6 h-6" />,
+    icon: Palette,
     title: "Créativité",
     description: "Apporter des solutions originales, pertinentes et adaptées.",
-    color: "from-[#6366f1] to-[#8b5cf6]",
   },
   {
-    icon: <Shield className="w-6 h-6" />,
+    icon: Shield,
     title: "Professionnalisme",
     description: "Travailler avec rigueur, méthode et transparence.",
-    color: "from-[#10b981] to-[#34d399]",
   },
   {
-    icon: <Target className="w-6 h-6" />,
+    icon: Target,
     title: "Impact",
     description: "Viser des résultats concrets et mesurables.",
-    color: "from-[#f59e0b] to-[#fbbf24]",
   },
   {
-    icon: <Handshake className="w-6 h-6" />,
+    icon: Handshake,
     title: "Engagement",
     description: "Être un partenaire de confiance, à chaque étape de votre évolution.",
-    color: "from-[#ec4899] to-[#f43f5e]",
   },
 ];
 
-const getCardVariant = (index: number): Variants => ({
-  hidden: {
-    opacity: 0,
-    x: index % 2 === 0 ? -100 : 100,
-    y: 20,
-    rotate: index % 2 === 0 ? -6 : 6,
-    scale: 0.9,
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    rotate: 0,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      delay: index * 0.12,
-      type: "spring",
-      bounce: 0.3,
-    },
-  },
-});
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+function Photo({ src, alt, fromLeft }: { src: string; alt: string; fromLeft?: boolean }) {
+  return (
+    <motion.div
+      {...slideIn(fromLeft ? "left" : "right", 0.05)}
+      className={`relative min-h-[320px] sm:min-h-[420px] lg:min-h-0 ${fromLeft ? "lg:order-first" : ""}`}
+    >
+      <Image src={src} alt={alt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+    </motion.div>
+  );
+}
+
+function Panel({ children, fromRight }: { children: React.ReactNode; fromRight?: boolean }) {
+  return (
+    <motion.div
+      {...slideIn(fromRight ? "right" : "left")}
+      className="relative bg-gradient-to-br from-white to-[#e8f4fc] flex items-center"
+    >
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="w-full px-6 sm:px-10 lg:px-12 xl:px-14 py-14 md:py-16"
+      >
+        {children}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function Heading({ strong, light }: { strong: string; light: string }) {
+  return (
+    <motion.h2
+      variants={itemVariants}
+      className="font-heading text-[#0a1d6e] text-3xl md:text-4xl leading-tight mb-6 uppercase"
+    >
+      <span className="font-black italic">{strong}</span>{" "}
+      <span className="font-light">{light}</span>
+    </motion.h2>
+  );
+}
 
 export default function MissionValuesSection() {
   return (
-    <section className="py-24 overflow-hidden border-t border-slate-100/10">
-      <div className="container mx-auto px-4 md:px-8">
-        
-        {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-20">
-          <motion.span
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="inline-block py-2 px-4 rounded-full bg-[#34c4eb]/10 text-[#2488cd] font-bold text-xs uppercase tracking-[0.2em] mb-4"
-          >
-            Notre Engagement
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black text-white font-heading leading-tight mb-6"
-          >
-            Notre mission & nos <span className="font-serif italic font-normal text-[#2488cd] tracking-wide">valeurs</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg md:text-xl text-slate-300 leading-relaxed font-medium"
-          >
-            Aider nos clients à communiquer efficacement, à valoriser leur identité et à atteindre leurs objectifs à travers une stratégie claire, cohérente et impactante.
-          </motion.p>
+    <section id="mission-valeurs" className="py-24 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 space-y-16 md:space-y-24">
+
+        {/* Mission: text left, photo right */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[480px] max-w-6xl mx-auto">
+          <Panel>
+            <Heading strong="Notre" light="mission" />
+            <motion.p
+              variants={itemVariants}
+              className="text-slate-600 text-base md:text-lg leading-relaxed mb-10"
+            >
+              Aider nos clients à communiquer efficacement, à valoriser leur identité et à atteindre leurs objectifs à travers une stratégie claire, cohérente et impactante.
+            </motion.p>
+            <motion.div variants={itemVariants}>
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-3 rounded-full border border-[#0a1d6e] px-6 py-3 text-sm font-semibold uppercase tracking-wider text-[#0a1d6e] transition-colors duration-300 hover:bg-[#0a1d6e] hover:text-white"
+              >
+                <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:rotate-45" />
+                Travaillons ensemble
+              </Link>
+            </motion.div>
+          </Panel>
+          <Photo
+            src="https://images.unsplash.com/photo-1739298061740-5ed03045b280?w=1400&q=80"
+            alt="Équipe en réunion de stratégie"
+          />
         </div>
 
-        {/* Dynamic Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-          {values.map((val, index) => (
-            <motion.div
-              key={index}
-              variants={getCardVariant(index)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-40px" }}
-              whileHover={{ 
-                y: -10,
-                scale: 1.05,
-                transition: { duration: 0.2, type: "spring", bounce: 0.4 }
-              }}
-              className="group relative overflow-hidden bg-slate-900/40 backdrop-blur-md hover:bg-slate-900/60 rounded-3xl p-6 border border-white/10 hover:border-white/30 hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col h-full justify-between"
-            >
-              {/* Subtle top indicator bar */}
-              <div className={`absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r ${val.color}`} />
-              
-              <div>
-                {/* Icon wrapper */}
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${val.color} text-white flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform duration-300`}>
-                  {val.icon}
-                </div>
-
-                <h3 className="text-lg font-black text-white mb-3 font-heading">
-                  {val.title}
-                </h3>
-                <p className="text-slate-300 text-sm leading-relaxed font-medium">
-                  {val.description}
-                </p>
-              </div>
-
-              {/* Bottom dynamic accent path line */}
-              <div className={`mt-6 w-8 h-[2px] bg-gradient-to-r ${val.color} group-hover:w-full transition-all duration-300`} />
-            </motion.div>
-          ))}
+        {/* Values: photo left, list right */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[480px] max-w-6xl mx-auto">
+          <Panel fromRight>
+            <Heading strong="Nos" light="valeurs" />
+            <ul className="space-y-5">
+              {values.map(({ icon: Icon, title, description }) => (
+                <motion.li key={title} variants={itemVariants} className="flex items-start gap-4">
+                  <span className="flex-shrink-0 w-10 h-10 rounded-full bg-[#0a1d6e] text-white flex items-center justify-center">
+                    <Icon size={18} />
+                  </span>
+                  <div>
+                    <h3 className="font-heading font-bold text-[#0a1d6e] text-lg leading-tight">
+                      {title}
+                    </h3>
+                    <p className="text-slate-600 text-[15px] leading-relaxed">
+                      {description}
+                    </p>
+                  </div>
+                </motion.li>
+              ))}
+            </ul>
+          </Panel>
+          <Photo
+            src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1400&q=80"
+            alt="Équipe travaillant ensemble sur ordinateur"
+            fromLeft
+          />
         </div>
 
       </div>

@@ -9,6 +9,7 @@ export function generateStaticParams() {
     { slug: "creation-site-web" },
     { slug: "creation-application-mobile" },
     { slug: "site-responsive-mobile" },
+    { slug: "conseil-financier" },
   ];
 }
 

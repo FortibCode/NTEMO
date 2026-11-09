@@ -17,7 +17,7 @@ export default function ServiceContent({ params }: { params: Promise<{ slug: str
       <>
         <Navbar />
         <div className="min-h-screen flex flex-col items-center justify-center bg-[#01030c] text-white px-4">
-          <h1 className="text-3xl font-black mb-4">Service non trouvé</h1>
+          <h1 className="text-3xl font-black mb-4 uppercase">Service non trouvé</h1>
           <p className="text-slate-400 mb-8">Désolé, ce service n&apos;existe pas ou a été déplacé.</p>
           <Link href="/" className="flex items-center gap-2 bg-[#34c4eb] text-slate-900 px-6 py-3 rounded-full font-bold">
             <ArrowLeft size={18} />
@@ -51,7 +51,7 @@ export default function ServiceContent({ params }: { params: Promise<{ slug: str
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 }}
-              className="text-4xl md:text-6xl font-black font-heading tracking-tight mb-4 text-white"
+              className="text-4xl md:text-6xl font-black font-heading tracking-tight mb-4 text-white uppercase"
             >
               {service.title}
             </motion.h1>
@@ -68,7 +68,7 @@ export default function ServiceContent({ params }: { params: Promise<{ slug: str
         <section className="container mx-auto px-4 md:px-8 mt-10 md:mt-16 relative z-10">
           <div className="flex flex-col lg:flex-row items-start gap-16 lg:gap-24">
             <div className="w-full lg:w-7/12">
-              <h2 className="text-2xl md:text-3xl font-black text-white font-heading mb-6">
+              <h2 className="text-2xl md:text-3xl font-black text-white font-heading mb-6 uppercase">
                 Pourquoi choisir notre expertise ?
               </h2>
               <p className="text-slate-400 text-lg leading-relaxed font-medium mb-10">
@@ -124,7 +124,7 @@ export default function ServiceContent({ params }: { params: Promise<{ slug: str
               <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#1e40af]/10 rounded-full blur-[80px]" />
             </div>
             <div className="relative z-10 max-w-2xl">
-              <h2 className="text-3xl md:text-4xl font-black font-heading mb-4 leading-tight text-white">
+              <h2 className="text-3xl md:text-4xl font-black font-heading mb-4 leading-tight text-white uppercase">
                 Prêt à faire décoller vos conversions ?
               </h2>
               <p className="text-slate-400 font-medium leading-relaxed">

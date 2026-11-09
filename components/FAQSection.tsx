@@ -36,20 +36,12 @@ export default function FAQSection() {
 
         {/* Header */}
         <div className="text-center mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-block py-2 px-4 rounded-full bg-[#34c4eb]/10 text-[#2488cd] font-bold text-xs uppercase tracking-[0.2em] mb-4"
-          >
-            Questions Fréquentes
-          </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black text-white font-heading leading-tight"
+            className="text-4xl md:text-5xl font-black text-white font-heading leading-tight uppercase"
           >
             Vous avez des <span className="font-serif italic font-normal text-[#2488cd] tracking-wide">questions ?</span>
           </motion.h2>

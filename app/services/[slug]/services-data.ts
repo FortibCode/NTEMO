@@ -29,7 +29,7 @@ export const servicesData: Record<string, {
     title: "Animation Page Pro",
     subtitle: "Fédérez et engagez votre communauté au quotidien",
     description: "Vos réseaux sociaux sont la vitrine vivante de votre marque. Une page inactive ou mal gérée peut nuire à votre crédibilité. Notre service d'animation professionnelle prend en charge la planification, la création de contenus interactifs et la modération pour faire de vos pages un lieu d'échange dynamique et engageant.",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80",
+    image: "/hero/hero-1.jpg",
     features: [
       "Élaboration d'une ligne éditoriale sur mesure et calendrier de publication mensuel.",
       "Création graphique de visuels professionnels (images, carrousels, stories).",
@@ -137,6 +137,25 @@ export const servicesData: Record<string, {
       "Amélioration des conversions et des prises de contact.",
       "Meilleur classement sur Google grâce au Mobile-First Index.",
       "Confort d'utilisation et navigation intuitive garantis.",
+    ],
+  },
+  "conseil-financier": {
+    title: "Conseil Financier",
+    subtitle: "Un accompagnement pour une meilleure gestion et optimisation de vos ressources financières",
+    description: "Une bonne gestion financière est la clé de la pérennité et de la croissance de toute entreprise. Nous vous accompagnons dans l'analyse de votre situation, la structuration de votre budget et l'optimisation de vos ressources afin de sécuriser votre trésorerie et de prendre des décisions éclairées.",
+    image: "https://images.unsplash.com/photo-1521791055366-0d553872125f?w=800&q=80",
+    features: [
+      "Diagnostic financier complet de votre activité (rentabilité, charges, trésorerie).",
+      "Élaboration et suivi de budgets prévisionnels adaptés à vos objectifs.",
+      "Optimisation des coûts et rationalisation de vos dépenses.",
+      "Mise en place de tableaux de bord et d'indicateurs de pilotage financier.",
+      "Accompagnement dans la recherche de financements et la préparation de dossiers.",
+    ],
+    benefits: [
+      "Une vision claire et maîtrisée de vos finances.",
+      "Une trésorerie sécurisée et mieux anticipée.",
+      "Des ressources optimisées pour plus de rentabilité.",
+      "Des décisions stratégiques fondées sur des données fiables.",
     ],
   },
 };

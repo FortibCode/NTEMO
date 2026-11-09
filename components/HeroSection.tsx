@@ -1,211 +1,165 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ShieldCheck, CreditCard, Clock, Share2, Layers, Search, BarChart2, Globe, Smartphone, Layout } from "lucide-react";
+import Link from "next/link";
 
-const SERVICES = [
-  {
-    icon: <Share2 className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-[#34c4eb]" />,
-    title: "Publicité Réseaux Sociaux",
-    description: "Des campagnes percutantes sur Facebook, Instagram, TikTok et LinkedIn pour booster votre visibilité et générer des leads qualifiés.",
-  },
-  {
-    icon: <Layers className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-[#6366f1]" />,
-    title: "Animation Page Pro",
-    description: "Gestion et animation professionnelle de vos pages d'entreprise pour bâtir une communauté engagée et fidèle.",
-  },
-  {
-    icon: <Search className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-[#10b981]" />,
-    title: "Référencement Naturel (SEO)",
-    description: "Optimisez votre positionnement sur Google pour attirer un trafic qualifié et durable sans dépenser en publicité.",
-  },
-  {
-    icon: <BarChart2 className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-[#f59e0b]" />,
-    title: "Google AdWords",
-    description: "Des campagnes Google Ads ciblées et rentables pour apparaître en tête des résultats au bon moment.",
-  },
-  {
-    icon: <Globe className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-[#ec4899]" />,
-    title: "Création Site Web",
-    description: "Des sites web modernes, rapides et sur mesure qui convertissent vos visiteurs en clients.",
-  },
-  {
-    icon: <Smartphone className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-[#34c4eb]" />,
-    title: "Création Application Mobile",
-    description: "Développement d'applications iOS et Android ergonomiques pour répondre aux besoins de vos utilisateurs.",
-  },
-  {
-    icon: <Layout className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-[#10b981]" />,
-    title: "Site Responsive/Mobile",
-    description: "Des interfaces web parfaitement adaptées à tous les écrans pour une expérience utilisateur optimale.",
-  },
+// Web-sized copies of public/image-1..4.jpg (originals are 5–13 MB each)
+const HERO_IMAGES = [
+  { src: "/hero/hero-1.jpg", position: "center 35%" },
+  { src: "/hero/hero-2.jpg", position: "center" },
+  { src: "/hero/hero-3.jpg", position: "center 30%" },
+  { src: "/hero/hero-4.jpg", position: "center" },
 ];
 
+const SLIDE_MS = 6000;
+
+const HEADLINES = [
+  { strong: "Propulser", light: "votre marque" },
+  { strong: "Valoriser", light: "votre image" },
+  { strong: "Accélérer", light: "votre croissance" },
+];
+
+// NTÊMO "N" monogram (same geometry as public/logo-ntemo.svg), drawn as one
+// translucent shape for the large watermark.
+function Monogram({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 56 74" className={className} aria-hidden="true">
+      <defs>
+        <mask id="hero-n-cut" maskUnits="userSpaceOnUse" x="-50" y="-50" width="200" height="200">
+          <rect x="-50" y="-50" width="200" height="200" fill="#fff" />
+          <line x1="-6" y1="-32" x2="60" y2="105" stroke="#000" strokeWidth="23" />
+        </mask>
+        <linearGradient id="hero-n-grad" x1="0" y1="0" x2="0.4" y2="1">
+          <stop offset="0" stopColor="#ffffff" />
+          <stop offset="1" stopColor="#ffffff" />
+        </linearGradient>
+      </defs>
+      <g fill="url(#hero-n-grad)">
+        <g mask="url(#hero-n-cut)">
+          <path d="M0 17 V64.5 a8.5 8.5 0 0 0 17 0 V8 Z" />
+          <path d="M39 10 a8.5 8.5 0 0 1 17 0 V72 H39 Z" />
+        </g>
+      </g>
+      <line x1="13.5" y1="9" x2="40" y2="64" stroke="url(#hero-n-grad)" strokeWidth="17" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function SmallMark() {
+  return (
+    <svg viewBox="0 0 56 74" className="w-3.5 h-[18px]" aria-hidden="true" fill="currentColor">
+      <path d="M0 17 V64.5 a8.5 8.5 0 0 0 17 0 V30 Z" />
+      <path d="M39 10 a8.5 8.5 0 0 1 17 0 V60 L39 32 Z" />
+      <line x1="13.5" y1="9" x2="40" y2="64" stroke="currentColor" strokeWidth="17" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export default function HeroSection() {
-  const [currentService, setCurrentService] = useState(0);
+  const [slide, setSlide] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentService((prev) => (prev + 1) % SERVICES.length);
-    }, 4000); // Change every 4 seconds
-    return () => clearInterval(timer);
+    const id = setTimeout(() => setSlide((i) => (i + 1) % HERO_IMAGES.length), SLIDE_MS);
+    return () => clearTimeout(id);
+  }, [slide]);
+
+  // Preload the other slides so each crossfade is instant
+  useEffect(() => {
+    HERO_IMAGES.slice(1).forEach(({ src }) => {
+      const img = new window.Image();
+      img.src = src;
+    });
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center pt-32 pb-12 overflow-hidden text-center">
-      
-      {/* Global background shines through from layout.tsx */}
+    <section className="relative h-screen min-h-[640px] w-full overflow-hidden">
 
-      <div className="container mx-auto px-4 md:px-8 z-10 flex flex-col items-center max-w-5xl">
-        
-        {/* Top Badge */}
+      {/* Background slideshow: crossfade + slow zoom */}
+      <AnimatePresence initial={false}>
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, type: "spring", bounce: 0.4 }}
-          className="mb-8"
+          key={slide}
+          initial={{ opacity: 0, scale: 1.12 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            opacity: { duration: 1.4, ease: "easeInOut" },
+            scale: { duration: SLIDE_MS / 1000 + 1.5, ease: "linear" },
+          }}
+          className="absolute inset-0"
         >
-          <div className="inline-flex items-center gap-3 py-1.5 px-2 pr-4 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-sm cursor-pointer hover:bg-white/10 transition-colors shadow-lg">
-            <span className="bg-[#2488cd] text-white text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-[0_0_15px_rgba(36,136,205,0.5)]">Nouveau</span>
-            <span className="text-slate-300 font-medium text-xs sm:text-sm">Découvrez nos services d'expertise</span>
-            <ArrowRight size={14} className="text-slate-400" />
-          </div>
-        </motion.div>
-
-        {/* Main Heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, type: "spring" }}
-          className="text-5xl md:text-6xl lg:text-7xl font-black font-heading tracking-tight mb-6 text-white leading-[1.1]"
-        >
-          Propulsez Votre Entreprise <br className="hidden md:block" />
-          <span className="font-serif italic font-normal text-slate-200">
-            Avec Notre Expertise
-          </span>
-        </motion.h1>
-
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-lg md:text-xl text-slate-200 mb-10 max-w-2xl leading-relaxed"
-        >
-          Optimisez vos opérations, boostez votre productivité et améliorez la satisfaction de vos clients avec notre plateforme de services sur-mesure.
-        </motion.p>
-
-        {/* Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center gap-4 mb-16 w-full justify-center"
-        >
-          <a
-            href="#contact"
-            className="px-8 py-4 bg-gradient-to-r from-[#34c4eb] to-[#2488cd] text-white rounded-full font-black text-sm hover:from-[#2488cd] hover:to-[#34c4eb] transition-all shadow-[0_0_30px_rgba(52,196,235,0.45)] hover:shadow-[0_0_40px_rgba(52,196,235,0.65)] w-full sm:w-auto hover:scale-105 transform duration-200"
-          >
-            Démarrer maintenant
-          </a>
-          <a
-            href="#services"
-            className="px-8 py-4 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-white/20 hover:border-white/40 hover:gap-3 transition-all w-full sm:w-auto shadow-lg"
-          >
-            Voir nos services <ArrowRight size={16} />
-          </a>
-        </motion.div>
-
-        {/* Features Strip */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-xs sm:text-sm text-slate-300 font-medium mb-10"
-        >
-          <div className="flex items-center gap-2">
-            <Clock size={16} className="text-[#34c4eb]" />
-            Livraison rapide
-          </div>
-          <div className="flex items-center gap-2">
-            <CreditCard size={16} className="text-[#34c4eb]" />
-            Tarification transparente
-          </div>
-          <div className="flex items-center gap-2">
-            <ShieldCheck size={16} className="text-[#34c4eb]" />
-            Garantie de qualité
-          </div>
-        </motion.div>
-
-      </div>
-
-      {/* Fluid 3D Element Image & Laptop Mockup */}
-      <motion.div 
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, delay: 0.4 }}
-        className="w-full max-w-6xl mx-auto mt-4 relative z-0 px-3 sm:px-4 md:px-6"
-      >
-        <div className="relative rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-white/5 shadow-[0_0_100px_rgba(36,136,205,0.15)] bg-[#030712]/50 flex flex-col items-center justify-center py-6 sm:py-10 md:py-20 min-h-[380px] sm:min-h-[450px] md:min-h-[500px]">
-          {/* Fluid Background Image */}
-          <img 
-            src="/fluid-bg.png" 
-            alt="Fluid 3D Design" 
-            className="absolute inset-0 w-full h-full object-cover opacity-80"
-            style={{ maskImage: "linear-gradient(to bottom, black 70%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 70%, transparent 100%)" }}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={HERO_IMAGES[slide].src}
+            alt=""
+            className="w-full h-full object-cover"
+            style={{ objectPosition: HERO_IMAGES[slide].position }}
           />
-          
-          {/* Laptop Mockup */}
-          <div className="relative z-30 w-full max-w-xs sm:max-w-2xl md:max-w-4xl px-2 sm:px-4 md:px-12 mt-2 sm:mt-4 mb-14 sm:mb-20 drop-shadow-2xl mx-auto">
-            {/* Screen frame */}
-            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] bg-[#050b14]/90 backdrop-blur-2xl rounded-t-[1.25rem] sm:rounded-t-[1.5rem] md:rounded-t-[2rem] border-[4px] sm:border-[6px] md:border-[10px] border-[#1e293b] shadow-2xl overflow-hidden flex flex-col items-center justify-center p-3 sm:p-6 md:p-10 text-center ring-1 ring-white/10">
-               {/* Internal glow */}
-               <div className="absolute inset-0 bg-gradient-to-br from-[#34c4eb]/15 via-transparent to-[#6366f1]/10 pointer-events-none" />
-               
-               <AnimatePresence mode="wait">
-                 <motion.div
-                   key={currentService}
-                   initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
-                   animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                   exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
-                   transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
-                   className="flex flex-col items-center justify-center h-full w-full max-w-xl"
-                 >
-                   <div className="mb-3 sm:mb-5 md:mb-8 p-2.5 sm:p-4 md:p-5 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/5 border border-white/10 shadow-[0_0_30px_rgba(52,196,235,0.2)] backdrop-blur-md">
-                     {SERVICES[currentService].icon}
-                   </div>
-                   <h3 className="text-lg sm:text-2xl md:text-4xl font-black font-heading text-white mb-1.5 sm:mb-3 md:mb-4 leading-tight tracking-tight">
-                     {SERVICES[currentService].title}
-                   </h3>
-                   <p className="text-slate-300 text-[11px] sm:text-sm md:text-lg leading-relaxed font-medium px-1 sm:px-4">
-                     {SERVICES[currentService].description}
-                   </p>
-                 </motion.div>
-               </AnimatePresence>
-               
-               {/* Progress indicator */}
-               <div className="absolute bottom-3 sm:bottom-5 md:bottom-6 flex gap-1 sm:gap-2 md:gap-3">
-                 {SERVICES.map((_, idx) => (
-                   <button
-                     key={idx}
-                     onClick={() => setCurrentService(idx)}
-                     className={`h-1 sm:h-1.5 md:h-2 rounded-full transition-all duration-500 cursor-pointer ${idx === currentService ? "w-5 sm:w-8 md:w-12 bg-[#34c4eb] shadow-[0_0_10px_#34c4eb]" : "w-1.5 sm:w-2 md:w-3 bg-white/20 hover:bg-white/40"}`}
-                     aria-label={`Aller au service ${idx + 1}`}
-                   />
-                 ))}
-               </div>
-            </div>
-            {/* Laptop Base */}
-            <div className="relative w-[108%] -left-[4%] h-2.5 sm:h-4 md:h-6 bg-gradient-to-b from-[#94a3b8] to-[#475569] rounded-b-xl sm:rounded-b-2xl shadow-2xl flex justify-center border-t border-slate-300">
-              <div className="w-1/4 h-1.5 sm:h-2 md:h-3 bg-[#cbd5e1] rounded-b-md md:rounded-b-lg opacity-50 shadow-inner"></div>
-            </div>
-            {/* Glow under the laptop */}
-            <div className="absolute -bottom-8 sm:-bottom-10 left-1/2 -translate-x-1/2 w-3/4 h-8 sm:h-10 bg-[#34c4eb]/30 blur-2xl rounded-[100%] pointer-events-none" />
-          </div>
-        </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Neutral fade at the bottom keeps the white headline readable */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" />
+
+      {/* Large translucent monogram */}
+      <motion.div
+        initial={{ opacity: 0, x: 80 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1.4, delay: 0.3, ease: "easeOut" }}
+        className="absolute right-[-12%] sm:right-[-4%] lg:right-[4%] top-[14%] h-[62%] pointer-events-none"
+      >
+        <Monogram className="h-full w-auto opacity-25" />
       </motion.div>
-      
+
+      {/* Headline + CTA */}
+      <div className="relative z-10 h-full container mx-auto px-6 md:px-10 lg:px-20 flex flex-col justify-end pb-20 md:pb-28">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
+          <h1 className="font-heading text-white text-[2.4rem] sm:text-5xl md:text-6xl leading-[1.15] uppercase">
+            {HEADLINES.map((line, i) => (
+              <motion.span
+                key={line.strong}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 + i * 0.18, ease: "easeOut" }}
+                className="block"
+              >
+                <span className="font-black italic">{line.strong}</span>{" "}
+                <span className="font-light">{line.light}</span>
+              </motion.span>
+            ))}
+          </h1>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="lg:mb-3"
+          >
+            <Link
+              href="/#services"
+              className="group inline-flex items-center gap-3 rounded-full border border-white/80 px-6 py-3.5 text-sm font-medium uppercase tracking-wider text-white backdrop-blur-[2px] transition-colors duration-300 hover:bg-white hover:text-[#1b2a6b]"
+            >
+              <SmallMark />
+              Découvrir nos services
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+      {/* Slide indicators */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2">
+        {HERO_IMAGES.map((img, i) => (
+          <button
+            key={img.src}
+            type="button"
+            onClick={() => setSlide(i)}
+            aria-label={`Afficher l'image ${i + 1}`}
+            aria-current={i === slide}
+            className={`h-1 rounded-full transition-all duration-500 ${
+              i === slide ? "w-8 bg-white" : "w-3 bg-white/40 hover:bg-white/70"
+            }`}
+          />
+        ))}
+      </div>
     </section>
   );
 }

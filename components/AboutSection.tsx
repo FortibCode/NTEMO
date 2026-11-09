@@ -2,152 +2,96 @@
 
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
-import { Target } from "lucide-react";
+import Link from "next/link";
+import { slideIn } from "@/components/splitMotion";
+import { ArrowUpRight } from "lucide-react";
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
 export default function AboutSection() {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, type: "spring" } },
-  };
-
   return (
     <section id="about" className="py-24 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="flex flex-col lg:flex-row items-center gap-20 lg:gap-32">
-          
-          {/* Left Part: Mixed Image & Logo Illustration */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-            className="w-full lg:w-5/12 flex justify-center relative z-10"
-          >
-            {/* Main Image Container */}
-            <div className="relative w-[300px] h-[350px] md:w-[450px] md:h-[500px]">
-              
-              {/* Background abstract shapes for depth */}
-              <div className="absolute -inset-4 bg-gradient-to-tr from-[#34c4eb] to-[#1e40af] rounded-[3rem] rotate-6 opacity-30 blur-2xl -z-10" />
-              <div className="absolute inset-0 bg-[#34c4eb] rounded-[2.5rem] -rotate-3 scale-105 opacity-20 -z-10" />
-              
-              <div className="absolute inset-0 bg-white rounded-[2.5rem] shadow-2xl border-8 border-white flex items-center justify-center p-6 md:p-10 overflow-hidden">
-                <Image 
-                  src="/logo-ntemo-rebuilt.png" 
-                  alt="NTEMO Consulting Logo" 
-                  fill
-                  priority
-                  className="object-contain p-4 md:p-6"
-                  sizes="(max-width: 768px) 300px, 450px"
-                />
-              </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[520px] max-w-6xl mx-auto">
 
-              {/* Floating Logo Badge */}
-              <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-8 -left-8 md:-bottom-12 md:-left-12 bg-slate-900/80 backdrop-blur-md px-8 py-6 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] flex flex-col items-center border border-white/10 z-20"
-              >
-                <div className="w-16 h-16 rounded-2xl overflow-hidden mb-3 border border-white/20 shadow-md flex items-center justify-center p-1 bg-white">
-                  <Image
-                    src="/logo-ntemo-rebuilt.png"
-                    alt="NTEMO Consulting"
-                    width={64}
-                    height={64}
-                    className="w-full h-full object-contain rounded-xl"
-                  />
-                </div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[16px] font-black leading-none tracking-tighter text-white uppercase">
-                    NTEMO
-                  </span>
-                  <span className="text-[9px] font-bold leading-none tracking-widest text-[#34c4eb] mt-[3px] uppercase">
-                    Consulting
-                  </span>
-                </div>
-              </motion.div>
-              
-              {/* Floating Highlight Badge */}
-              <motion.div
-                animate={{ y: [0, 15, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute top-10 -right-6 md:top-16 md:-right-10 bg-slate-900/60 backdrop-blur-md px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-white/10 z-20"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-[#2488cd]">
-                    <Target size={20} />
-                  </div>
-                  <span className="font-bold text-slate-200 text-sm">Stratégie 100% sur mesure</span>
-                </div>
-              </motion.div>
-
-            </div>
-          </motion.div>
-
-          {/* Right Part: Dynamic Animated Text */}
-          <motion.div 
+        {/* Left: brand panel */}
+        <motion.div
+          {...slideIn("left")}
+          className="relative bg-gradient-to-br from-white to-[#e8f4fc] flex items-center"
+        >
+          <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="w-full lg:w-7/12 flex flex-col items-start text-left"
+            className="w-full px-6 sm:px-10 lg:px-12 xl:px-14 py-14 md:py-16"
           >
-            <motion.div variants={itemVariants} className="mb-4 flex items-center gap-3">
+            {/* Logo lockup */}
+            <motion.div variants={itemVariants} className="mb-10">
               <Image
-                src="/logo-ntemo.jpg"
-                alt="NTEMO Consulting Logo"
-                width={36}
-                height={36}
-                className="w-9 h-9 object-contain rounded-lg border border-white/10 shadow-md"
+                src="/logo-ntemo-officiel.svg"
+                alt="NTEMO Consulting"
+                width={142}
+                height={112}
+                className="h-20 md:h-24 w-auto"
               />
-              <span className="inline-block py-2 px-4 rounded-full bg-[#34c4eb]/10 text-[#2488cd] font-bold text-xs uppercase tracking-[0.2em]">
-                Qui sommes-nous ?
-              </span>
             </motion.div>
 
-            <motion.h3 
+            <motion.p
               variants={itemVariants}
-              className="text-4xl md:text-6xl font-black text-white mb-8 font-heading leading-[1.25] tracking-tight"
+              className="text-slate-600 text-base md:text-lg leading-relaxed mb-5"
             >
-              L'excellence stratégique pour votre <br className="hidden md:block"/>
-              <span className="font-serif italic font-normal text-[#2488cd] tracking-wide block my-1">
-                Image de Marque
-              </span>
-            </motion.h3>
+              <strong className="text-[#0a1d6e] font-bold">NTEMO Consulting</strong>{" "}est une agence de communication et de conseil stratégique dédiée à l&apos;accompagnement des entreprises, institutions et porteurs de projets dans la construction, la valorisation et le développement de leur image de marque.
+            </motion.p>
 
-            <motion.div variants={itemVariants} className="space-y-6 text-lg text-slate-300 leading-relaxed font-medium">
-              <p>
-                <span className="inline-flex items-center gap-2 mr-1">
-                  <Image
-                    src="/logo-ntemo.jpg"
-                    alt="NTEMO Consulting"
-                    width={28}
-                    height={28}
-                    className="w-7 h-7 inline-block object-contain rounded-md align-sub border border-white/10"
-                  />
-                  <strong className="text-white font-bold ml-1">NTEMO CONSULTING</strong>
-                </span>{" "}
-                est une agence de communication et de conseil stratégique dédiée à l'accompagnement des entreprises, institutions et porteurs de projets dans la construction, la valorisation et le développement de leur image de marque.
-              </p>
-              
-              <div className="h-px w-24 bg-gradient-to-r from-[#34c4eb] to-transparent my-4" />
-              
-              <p>
-                Nous plaçons <span className="text-white font-bold">l'humain</span>, <span className="text-white font-bold">la créativité</span> et <span className="text-white font-bold">la performance</span> au cœur de nos actions pour vous offrir des solutions sur mesure, efficaces et innovantes.
-              </p>
+            <motion.p
+              variants={itemVariants}
+              className="text-slate-600 text-base md:text-lg leading-relaxed mb-12"
+            >
+              Nous plaçons l&apos;humain, la créativité et la performance au cœur de nos actions pour vous offrir des solutions sur mesure, efficaces et innovantes.
+            </motion.p>
+
+            <motion.div variants={itemVariants}>
+              <Link
+                href="/#services"
+                className="group inline-flex items-center gap-3 rounded-full border border-[#0a1d6e] px-6 py-3 text-sm font-semibold uppercase tracking-wider text-[#0a1d6e] transition-colors duration-300 hover:bg-[#0a1d6e] hover:text-white"
+              >
+                <ArrowUpRight
+                  size={18}
+                  className="transition-transform duration-300 group-hover:rotate-45"
+                />
+                En savoir plus
+              </Link>
             </motion.div>
           </motion.div>
+        </motion.div>
 
-        </div>
+        {/* Right: photo */}
+        <motion.div
+          {...slideIn("right", 0.05)}
+          className="relative min-h-[320px] sm:min-h-[420px] lg:min-h-0"
+        >
+          <Image
+            src="https://images.unsplash.com/photo-1739298061707-cefee19941b7?w=1400&q=80"
+            alt="Réunion de travail d'une équipe autour d'une table"
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover"
+          />
+        </motion.div>
+
+      </div>
       </div>
     </section>
   );

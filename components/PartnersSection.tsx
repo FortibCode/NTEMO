@@ -19,22 +19,14 @@ const duplicatedPartners = [
 
 export default function PartnersSection() {
   return (
-    <section className="py-20 overflow-hidden border-t border-b border-white/5 bg-[#01030c]/50 backdrop-blur-sm relative z-10">
+    <section id="partenaires" className="py-20 overflow-hidden border-t border-b border-white/5 bg-[#01030c]/50 backdrop-blur-sm relative z-10">
       <div className="container mx-auto px-4 md:px-8 mb-12 text-center">
-        <motion.span
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="inline-block py-2 px-4 rounded-full bg-[#34c4eb]/10 text-[#34c4eb] font-bold text-xs uppercase tracking-[0.2em] mb-4"
-        >
-          Ils nous font confiance
-        </motion.span>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-3xl md:text-4xl font-black text-white font-heading leading-tight"
+          className="text-3xl md:text-4xl font-black text-white font-heading leading-tight uppercase"
         >
           Nos partenaires &amp;{" "}
           <span className="font-serif italic font-normal text-[#2488cd] tracking-wide">clients</span>

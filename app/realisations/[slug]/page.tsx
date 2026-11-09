@@ -1,13 +1,8 @@
 import RealisationContent from "./RealisationContent";
+import { realisationSlugs } from "./realisations-data";
 
 export function generateStaticParams() {
-  return [
-    { slug: "projet-1" },
-    { slug: "projet-2" },
-    { slug: "projet-3" },
-    { slug: "projet-4" },
-    { slug: "projet-5" },
-  ];
+  return realisationSlugs.map((slug) => ({ slug }));
 }
 
 export default function RealisationDetailPage({ params }: { params: Promise<{ slug: string }> }) {

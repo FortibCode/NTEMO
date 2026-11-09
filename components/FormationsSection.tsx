@@ -1,138 +1,160 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { PenTool, Camera, Film, TrendingUp, Server, Code } from "lucide-react";
+import { motion, Variants } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { slideIn } from "@/components/splitMotion";
+import { ArrowUpRight, Clock, Target } from "lucide-react";
+
+const U = (id: string) => `https://images.unsplash.com/photo-${id}?w=1400&q=80`;
 
 const formations = [
   {
-    icon: <PenTool className="w-7 h-7" />,
     title: "Design graphique",
     duration: "4 semaines",
     level: "Débutant → Professionnel",
     description: "Apprenez à maîtriser les outils phares (Photoshop, Illustrator) et concevez des chartes et identités visuelles percutantes.",
-    color: "from-[#ec4899] to-[#f43f5e]",
+    image: U("1561070791-2526d30994b5"),
+    alt: "Palette de couleurs et maquettes de design graphique",
   },
   {
-    icon: <Camera className="w-7 h-7" />,
     title: "Photographie",
     duration: "3 semaines",
     level: "Débutant → Intermédiaire",
     description: "Maîtrisez le réglage d'exposition, le cadrage, le stylisme photo en studio et le traitement d'image professionnel.",
-    color: "from-[#34c4eb] to-[#2488cd]",
+    image: U("1616258288682-b428428213f3"),
+    alt: "Photographe avec son appareil photo",
   },
   {
-    icon: <Film className="w-7 h-7" />,
     title: "L'Audiovisuel",
     duration: "4 semaines",
     level: "Tous niveaux",
     description: "Formez-vous aux techniques de prise de vue, d'éclairage, d'enregistrement sonore et de montage vidéo professionnel.",
-    color: "from-[#6366f1] to-[#8b5cf6]",
+    image: "/hero/hero-4.jpg",
+    alt: "Jeune femme travaillant dans une régie vidéo",
   },
   {
-    icon: <TrendingUp className="w-7 h-7" />,
     title: "Gestion commerciale & Marketing digital",
     duration: "6 semaines",
     level: "Intermédiaire → Avancé",
     description: "Développez des techniques de vente efficaces et pilotez vos leviers digitaux pour démultiplier vos opportunités d'affaires.",
-    color: "from-[#f59e0b] to-[#fbbf24]",
+    image: U("1533750349088-cd871a92f312"),
+    alt: "Bureau avec des documents de stratégie marketing",
   },
   {
-    icon: <Server className="w-7 h-7" />,
-    title: "Téléphonie IP & administration Noc",
+    title: "Téléphonie IP & administration NOC",
     duration: "8 semaines",
     level: "Technique / Avancé",
     description: "Apprenez à déployer et superviser les infrastructures de VoIP d'entreprise et à piloter les centres d'opérations réseau (NOC).",
-    color: "from-[#10b981] to-[#34d399]",
+    image: U("1558494949-ef010cbdcc31"),
+    alt: "Baie de serveurs et câblage réseau",
   },
   {
-    icon: <Code className="w-7 h-7" />,
     title: "Développement Web",
     duration: "10 semaines",
     level: "Débutant → Développeur",
     description: "Apprenez HTML, CSS, JavaScript, la conception de bases de données et la création de sites internet modernes et adaptables.",
-    color: "from-[#8b5cf6] to-[#ec4899]",
+    image: U("1498050108023-c5249f4df085"),
+    alt: "Ordinateur portable affichant du code",
   },
 ];
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
 export default function FormationsSection() {
   return (
-    <section id="formations" className="py-24">
-      <div className="container mx-auto px-4 md:px-8">
-
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-block py-2 px-4 rounded-full bg-[#34c4eb]/10 text-[#2488cd] font-bold text-xs uppercase tracking-[0.2em] mb-4"
-          >
-            Formations Professionnelles
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black text-white font-heading leading-tight mb-5"
-          >
-            Montez en <span className="font-serif italic font-normal text-[#2488cd] tracking-wide">compétences</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-slate-400 animate-fade-in"
-          >
-            Des formations pratiques et certifiantes pour développer vos compétences et accélérer votre insertion ou évolution de carrière.
-          </motion.p>
-        </div>
-
-        {/* Formations Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {formations.map((formation, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              whileHover={{ y: -8 }}
-              className="group bg-slate-900/40 backdrop-blur-md text-white rounded-[2rem] p-8 border border-white/10 hover:border-white/30 hover:shadow-2xl transition-all duration-400 relative overflow-hidden cursor-pointer flex flex-col justify-between"
+    <section id="formations" className="py-24 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 space-y-16 md:space-y-24">
+        {formations.map((f, index) => {
+          const photoLeft = index % 2 === 1;
+          return (
+            <div
+              key={f.title}
+              className="grid grid-cols-1 lg:grid-cols-2 min-h-[460px] max-w-6xl mx-auto"
             >
-              {/* Gradient overlay on hover */}
-              <div className={`absolute inset-0 rounded-[2rem] bg-gradient-to-br ${formation.color} opacity-0 group-hover:opacity-[0.03] transition-opacity duration-400`} />
+              {/* Text panel */}
+              <motion.div
+                {...slideIn(photoLeft ? "right" : "left")}
+                className="relative bg-gradient-to-br from-white to-[#e8f4fc] flex items-center"
+              >
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="w-full px-6 sm:px-10 lg:px-12 xl:px-14 py-14 md:py-16"
+                >
+                  <motion.span
+                    variants={itemVariants}
+                    className="block text-xs font-semibold uppercase tracking-[0.25em] text-[#2488cd] mb-3"
+                  >
+                    Formation {String(index + 1).padStart(2, "0")}
+                  </motion.span>
 
-              <div>
-                {/* Header elements */}
-                <div className="flex items-center gap-4 mb-6">
-                  {/* Icon */}
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${formation.color} text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                    {formation.icon}
-                  </div>
-                  <div className="flex-1">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-0.5">Formation</span>
-                    <h3 className="text-lg font-black text-white font-heading leading-tight">{formation.title}</h3>
-                  </div>
-                </div>
+                  <motion.h2
+                    variants={itemVariants}
+                    className="font-heading font-black italic text-[#0a1d6e] text-3xl md:text-4xl leading-tight mb-5 uppercase"
+                  >
+                    {f.title}
+                  </motion.h2>
 
-                <p className="text-slate-400 leading-relaxed text-sm mb-6">{formation.description}</p>
-              </div>
+                  <motion.div
+                    variants={itemVariants}
+                    className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-[#0a1d6e] mb-6"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <Clock size={16} className="text-[#2488cd]" />
+                      {f.duration}
+                    </span>
+                    <span className="inline-flex items-center gap-2">
+                      <Target size={16} className="text-[#2488cd]" />
+                      {f.level}
+                    </span>
+                  </motion.div>
 
-              <div>
-                <div className="flex gap-2.5 mb-5 flex-wrap">
-                  <span className="text-[11px] font-bold bg-white/10 text-white px-3 py-1.5 rounded-full">
-                    ⏱ {formation.duration}
-                  </span>
-                  <span className="text-[11px] font-bold bg-[#34c4eb]/10 text-[#2488cd] px-3 py-1.5 rounded-full">
-                    🎯 {formation.level}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                  <motion.p
+                    variants={itemVariants}
+                    className="text-slate-600 text-base md:text-lg leading-relaxed mb-10"
+                  >
+                    {f.description}
+                  </motion.p>
+
+                  <motion.div variants={itemVariants}>
+                    <Link
+                      href="/contact"
+                      className="group inline-flex items-center gap-3 rounded-full border border-[#0a1d6e] px-6 py-3 text-sm font-semibold uppercase tracking-wider text-[#0a1d6e] transition-colors duration-300 hover:bg-[#0a1d6e] hover:text-white"
+                    >
+                      <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:rotate-45" />
+                      S&apos;inscrire
+                    </Link>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+
+              {/* Photo */}
+              <motion.div
+                {...slideIn(photoLeft ? "left" : "right", 0.05)}
+                className={`relative min-h-[300px] sm:min-h-[400px] lg:min-h-0 ${photoLeft ? "lg:order-first" : ""}`}
+              >
+                <Image
+                  src={f.image}
+                  alt={f.alt}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </motion.div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

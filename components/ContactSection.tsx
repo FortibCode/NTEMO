@@ -63,20 +63,12 @@ export default function ContactSection() {
 
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-block py-2 px-4 rounded-full bg-[#34c4eb]/10 text-[#34c4eb] font-bold text-xs uppercase tracking-[0.2em] mb-4"
-          >
-            Nous Contacter
-          </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black text-white font-heading mb-5 leading-tight"
+            className="text-4xl md:text-5xl font-black text-white font-heading mb-5 leading-tight uppercase"
           >
             Prêt à collaborer ?<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#34c4eb] to-[#7fdbf5]">Parlons-en.</span>
