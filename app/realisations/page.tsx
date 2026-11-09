@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { slideIn } from "@/components/splitMotion";
+import { half, splitBlock } from "@/components/splitMotion";
 import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -18,8 +18,8 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 60, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 };
 
 export default function RealisationsPage() {
@@ -40,13 +40,14 @@ export default function RealisationsPage() {
             {projects.map((p, index) => {
               const logoLeft = index % 2 === 1;
               return (
-                <div
+                <motion.div
+                  {...splitBlock}
                   key={p.slug}
                   className="grid grid-cols-1 lg:grid-cols-2 min-h-[480px] max-w-6xl mx-auto"
                 >
                   {/* Text panel */}
                   <motion.div
-                    {...slideIn(logoLeft ? "right" : "left")}
+                    {...half(logoLeft ? "right" : "left")}
                     className="bg-gradient-to-br from-white to-[#e8f4fc] flex items-center"
                   >
                     <motion.div
@@ -106,7 +107,7 @@ export default function RealisationsPage() {
 
                   {/* Logo side */}
                   <motion.div
-                    {...slideIn(logoLeft ? "left" : "right", 0.05)}
+                    {...half(logoLeft ? "left" : "right", 0.05)}
                     className={`relative bg-gradient-to-br ${p.tint} flex items-center justify-center p-10 md:p-16 min-h-[320px] ${
                       logoLeft ? "lg:order-first" : ""
                     }`}
@@ -114,14 +115,14 @@ export default function RealisationsPage() {
                     <motion.img
                       src={p.image}
                       alt={`Logo ${p.title}`}
-                      initial={{ scale: 0.9, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
+                      initial={{ scale: 0.6, opacity: 0, rotate: -6 }}
+                      whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
                       className="w-full max-w-[340px] h-auto object-contain mix-blend-multiply"
                     />
                   </motion.div>
-                </div>
+                </motion.div>
               );
             })}
           </div>

@@ -3,7 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { slideIn } from "@/components/splitMotion";
+import { half, splitBlock } from "@/components/splitMotion";
 import { ArrowUpRight } from "lucide-react";
 
 const containerVariants: Variants = {
@@ -15,19 +15,19 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 60, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 };
 
 export default function AboutSection() {
   return (
     <section id="about" className="py-24 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[520px] max-w-6xl mx-auto">
+      <motion.div {...splitBlock} className="grid grid-cols-1 lg:grid-cols-2 min-h-[520px] max-w-6xl mx-auto">
 
         {/* Left: brand panel */}
         <motion.div
-          {...slideIn("left")}
+          {...half("left")}
           className="relative bg-gradient-to-br from-white to-[#e8f4fc] flex items-center"
         >
           <motion.div
@@ -79,7 +79,7 @@ export default function AboutSection() {
 
         {/* Right: photo */}
         <motion.div
-          {...slideIn("right", 0.05)}
+          {...half("right", 0.05)}
           className="relative min-h-[320px] sm:min-h-[420px] lg:min-h-0"
         >
           <Image
@@ -91,7 +91,7 @@ export default function AboutSection() {
           />
         </motion.div>
 
-      </div>
+      </motion.div>
       </div>
     </section>
   );

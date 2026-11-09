@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import SplashScreen from "@/components/SplashScreen";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -41,6 +42,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen flex flex-col antialiased bg-transparent text-white relative">
         <div className="animated-bg" />
+        <SplashScreen />
         {children}
       </body>
     </html>

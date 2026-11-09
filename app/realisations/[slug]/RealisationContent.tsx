@@ -16,8 +16,8 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 60, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 };
 
 export default function RealisationContent({ params }: { params: Promise<{ slug: string }> }) {
@@ -67,8 +67,8 @@ export default function RealisationContent({ params }: { params: Promise<{ slug:
               <motion.img
                 src={projet.image}
                 alt={`Logo ${projet.title}`}
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
+                initial={{ scale: 0.6, opacity: 0, rotate: -6 }}
+                animate={{ scale: 1, opacity: 1, rotate: 0 }}
                 transition={{ duration: 0.9, ease: "easeOut", delay: 0.15 }}
                 className="w-full max-w-[380px] h-auto object-contain mix-blend-multiply"
               />

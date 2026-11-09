@@ -64,8 +64,8 @@ export default function ContactSection() {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 70, scale: 0.94 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl font-black text-white font-heading mb-5 leading-tight uppercase"
@@ -74,8 +74,8 @@ export default function ContactSection() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#34c4eb] to-[#7fdbf5]">Parlons-en.</span>
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 70, scale: 0.94 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="text-lg text-slate-200"
@@ -92,8 +92,8 @@ export default function ContactSection() {
             href={`https://wa.me/${whatsappNumber}`}
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: -160, rotate: -3 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             whileHover={{ y: -8, scale: 1.02 }}
@@ -110,8 +110,8 @@ export default function ContactSection() {
           {/* Call Card */}
           <motion.a
             href={`tel:${phoneNumber}`}
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 160, rotate: 3 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
             whileHover={{ y: -8, scale: 1.02 }}
@@ -128,8 +128,8 @@ export default function ContactSection() {
 
         {/* Social + Info banner — matching the screenshot */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 90, scale: 0.94 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.6 }}
           className="mt-16 relative rounded-[2.5rem] overflow-hidden"

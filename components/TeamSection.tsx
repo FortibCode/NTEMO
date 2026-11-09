@@ -46,7 +46,12 @@ const teamMembers: Member[] = [
 // Left half of the team slides in from the left, right half from the right,
 // and they meet in the middle (same motion as the split panels).
 const cardVariants: Variants = {
-  hidden: (i: number) => ({ opacity: 0, x: i < teamMembers.length / 2 ? -180 : 180 }),
+  hidden: (i: number) => ({
+    opacity: 0,
+    x: i < teamMembers.length / 2 ? "-60vw" : "60vw",
+    rotate: i < teamMembers.length / 2 ? -10 : 10,
+    scale: 0.85,
+  }),
   visible: (i: number) => {
     const half = teamMembers.length / 2;
     // cards closest to the centre arrive last so the row "closes" in the middle
@@ -54,7 +59,9 @@ const cardVariants: Variants = {
     return {
       opacity: 1,
       x: 0,
-      transition: { type: "spring", stiffness: 55, damping: 16, mass: 0.9, delay: fromEdge * 0.12 },
+      rotate: 0,
+      scale: 1,
+      transition: { type: "spring", stiffness: 45, damping: 14, mass: 1, delay: fromEdge * 0.18 },
     };
   },
 };
@@ -79,8 +86,8 @@ export default function TeamSection() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 70, scale: 0.94 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-5xl font-black text-white font-heading tracking-tight uppercase"
@@ -90,15 +97,12 @@ export default function TeamSection() {
         </div>
 
         {/* Team Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 max-w-6xl mx-auto">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 max-w-6xl mx-auto">
           {teamMembers.map((member, index) => (
             <motion.article
               key={member.name}
               custom={index}
               variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
               className="max-w-[320px] w-full mx-auto"
             >
               {/* Photo with hover excerpt */}
@@ -137,7 +141,7 @@ export default function TeamSection() {
               </div>
             </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* Full quote modal */}
@@ -155,7 +159,7 @@ export default function TeamSection() {
               aria-modal="true"
               aria-labelledby="team-modal-title"
               initial={{ opacity: 0, y: 30, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
+              animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
               exit={{ opacity: 0, y: 30, scale: 0.97 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
               onClick={(e) => e.stopPropagation()}

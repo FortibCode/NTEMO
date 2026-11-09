@@ -22,15 +22,15 @@ const slides: { slug: string; strong: string; light: string }[] = [
 const AUTOPLAY_MS = 7000;
 
 const imageVariants = {
-  enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 60 : -60, scale: 1.05 }),
+  enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 260 : -260, scale: 1.15 }),
   center: { opacity: 1, x: 0, scale: 1 },
-  exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -60 : 60, scale: 1.05 }),
+  exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -260 : 260, scale: 1.15 }),
 };
 
 const textVariants = {
-  enter: (dir: number) => ({ opacity: 0, y: dir > 0 ? 24 : -24 }),
+  enter: (dir: number) => ({ opacity: 0, y: dir > 0 ? 70 : -70 }),
   center: { opacity: 1, y: 0 },
-  exit: (dir: number) => ({ opacity: 0, y: dir > 0 ? -24 : 24 }),
+  exit: (dir: number) => ({ opacity: 0, y: dir > 0 ? -70 : 70 }),
 };
 
 export default function ServicesSection() {
@@ -59,8 +59,8 @@ export default function ServicesSection() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 70, scale: 0.94 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="text-4xl md:text-5xl font-black font-heading text-white mb-5 leading-tight uppercase"
@@ -68,8 +68,8 @@ export default function ServicesSection() {
             Nos Services
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 70, scale: 0.94 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-lg text-slate-300"
@@ -80,8 +80,8 @@ export default function ServicesSection() {
 
         {/* Carousel */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 120, scale: 0.94 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7 }}
           className="relative max-w-6xl mx-auto"

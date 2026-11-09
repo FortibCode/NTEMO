@@ -1,24 +1,37 @@
 // Shared entrance for the split "panel + photo" blocks: each half slides in
-// from its own side and the two meet in the middle with a soft spring.
-const transition = { type: "spring", stiffness: 55, damping: 16, mass: 0.9 } as const;
+// from far outside its own side and the two meet in the middle with a spring.
+//
+// The halves start off-screen, so they can't detect scrolling themselves:
+// the (static) block wrapper watches the viewport via `splitBlock` and the
+// halves animate through variants with `half(...)`.
+const transition = { type: "spring", stiffness: 40, damping: 14, mass: 1.1 } as const;
 
-const offset = (side: "left" | "right") => (side === "left" ? -180 : 180);
+// Each half starts 60% of the screen width away from its final position
+const offset = (side: "left" | "right") => (side === "left" ? "-60vw" : "60vw");
+const tilt = (side: "left" | "right") => (side === "left" ? -6 : 6);
 
-/** Scroll-triggered version (blocks further down the page). */
-export function slideIn(side: "left" | "right", delay = 0) {
+/** Spread on the block wrapper (a motion element that does not move). */
+export const splitBlock = {
+  initial: "hidden",
+  whileInView: "visible",
+  viewport: { once: true, margin: "-80px" },
+} as const;
+
+/** Spread on each half inside a `splitBlock` wrapper. */
+export function half(side: "left" | "right", delay = 0) {
   return {
-    initial: { opacity: 0, x: offset(side) },
-    whileInView: { opacity: 1, x: 0 },
-    viewport: { once: true, margin: "-80px" },
-    transition: { ...transition, delay },
+    variants: {
+      hidden: { opacity: 0, x: offset(side), rotate: tilt(side), scale: 0.85 },
+      visible: { opacity: 1, x: 0, rotate: 0, scale: 1, transition: { ...transition, delay } },
+    },
   };
 }
 
 /** On-load version (blocks visible as soon as the page opens). */
 export function slideInOnLoad(side: "left" | "right", delay = 0) {
   return {
-    initial: { opacity: 0, x: offset(side) },
-    animate: { opacity: 1, x: 0 },
+    initial: { opacity: 0, x: offset(side), rotate: tilt(side), scale: 0.85 },
+    animate: { opacity: 1, x: 0, rotate: 0, scale: 1 },
     transition: { ...transition, delay },
   };
 }

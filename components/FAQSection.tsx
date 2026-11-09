@@ -37,8 +37,8 @@ export default function FAQSection() {
         {/* Header */}
         <div className="text-center mb-16">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 70, scale: 0.94 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-5xl font-black text-white font-heading leading-tight uppercase"
@@ -52,8 +52,8 @@ export default function FAQSection() {
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 70, scale: 0.94 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.07 }}
               className={`rounded-2xl border transition-all duration-300 overflow-hidden ${

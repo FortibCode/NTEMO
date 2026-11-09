@@ -22,8 +22,8 @@ export default function PartnersSection() {
     <section id="partenaires" className="py-20 overflow-hidden border-t border-b border-white/5 bg-[#01030c]/50 backdrop-blur-sm relative z-10">
       <div className="container mx-auto px-4 md:px-8 mb-12 text-center">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 70, scale: 0.94 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-3xl md:text-4xl font-black text-white font-heading leading-tight uppercase"

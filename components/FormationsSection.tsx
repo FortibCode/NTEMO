@@ -3,7 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { slideIn } from "@/components/splitMotion";
+import { half, splitBlock } from "@/components/splitMotion";
 import { ArrowUpRight, Clock, Target } from "lucide-react";
 
 const U = (id: string) => `https://images.unsplash.com/photo-${id}?w=1400&q=80`;
@@ -65,8 +65,8 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 60, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 };
 
 export default function FormationsSection() {
@@ -76,13 +76,14 @@ export default function FormationsSection() {
         {formations.map((f, index) => {
           const photoLeft = index % 2 === 1;
           return (
-            <div
+            <motion.div
+              {...splitBlock}
               key={f.title}
               className="grid grid-cols-1 lg:grid-cols-2 min-h-[460px] max-w-6xl mx-auto"
             >
               {/* Text panel */}
               <motion.div
-                {...slideIn(photoLeft ? "right" : "left")}
+                {...half(photoLeft ? "right" : "left")}
                 className="relative bg-gradient-to-br from-white to-[#e8f4fc] flex items-center"
               >
                 <motion.div
@@ -141,7 +142,7 @@ export default function FormationsSection() {
 
               {/* Photo */}
               <motion.div
-                {...slideIn(photoLeft ? "left" : "right", 0.05)}
+                {...half(photoLeft ? "left" : "right", 0.05)}
                 className={`relative min-h-[300px] sm:min-h-[400px] lg:min-h-0 ${photoLeft ? "lg:order-first" : ""}`}
               >
                 <Image
@@ -152,7 +153,7 @@ export default function FormationsSection() {
                   className="object-cover"
                 />
               </motion.div>
-            </div>
+            </motion.div>
           );
         })}
       </div>

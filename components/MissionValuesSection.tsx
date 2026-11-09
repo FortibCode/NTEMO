@@ -3,7 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { slideIn } from "@/components/splitMotion";
+import { half, splitBlock } from "@/components/splitMotion";
 import { ArrowUpRight, Ear, Palette, Shield, Target, Handshake } from "lucide-react";
 
 const values = [
@@ -40,14 +40,14 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 60, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 };
 
 function Photo({ src, alt, fromLeft }: { src: string; alt: string; fromLeft?: boolean }) {
   return (
     <motion.div
-      {...slideIn(fromLeft ? "left" : "right", 0.05)}
+      {...half(fromLeft ? "left" : "right", 0.05)}
       className={`relative min-h-[320px] sm:min-h-[420px] lg:min-h-0 ${fromLeft ? "lg:order-first" : ""}`}
     >
       <Image src={src} alt={alt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
@@ -58,7 +58,7 @@ function Photo({ src, alt, fromLeft }: { src: string; alt: string; fromLeft?: bo
 function Panel({ children, fromRight }: { children: React.ReactNode; fromRight?: boolean }) {
   return (
     <motion.div
-      {...slideIn(fromRight ? "right" : "left")}
+      {...half(fromRight ? "right" : "left")}
       className="relative bg-gradient-to-br from-white to-[#e8f4fc] flex items-center"
     >
       <motion.div
@@ -92,7 +92,7 @@ export default function MissionValuesSection() {
       <div className="container mx-auto px-4 md:px-8 space-y-16 md:space-y-24">
 
         {/* Mission: text left, photo right */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[480px] max-w-6xl mx-auto">
+        <motion.div {...splitBlock} className="grid grid-cols-1 lg:grid-cols-2 min-h-[480px] max-w-6xl mx-auto">
           <Panel>
             <Heading strong="Notre" light="mission" />
             <motion.p
@@ -115,10 +115,10 @@ export default function MissionValuesSection() {
             src="https://images.unsplash.com/photo-1739298061740-5ed03045b280?w=1400&q=80"
             alt="Équipe en réunion de stratégie"
           />
-        </div>
+        </motion.div>
 
         {/* Values: photo left, list right */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[480px] max-w-6xl mx-auto">
+        <motion.div {...splitBlock} className="grid grid-cols-1 lg:grid-cols-2 min-h-[480px] max-w-6xl mx-auto">
           <Panel fromRight>
             <Heading strong="Nos" light="valeurs" />
             <ul className="space-y-5">
@@ -144,7 +144,7 @@ export default function MissionValuesSection() {
             alt="Équipe travaillant ensemble sur ordinateur"
             fromLeft
           />
-        </div>
+        </motion.div>
 
       </div>
     </section>

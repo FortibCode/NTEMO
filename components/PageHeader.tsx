@@ -34,8 +34,8 @@ export default function PageHeader({ strong, light, crumb, intro, image }: PageH
 
       <div className="relative z-10 h-full container mx-auto px-6 md:px-10 lg:px-20 flex flex-col justify-end pb-14 md:pb-20">
         <motion.nav
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           aria-label="Fil d'Ariane"
           className="mb-5"
@@ -56,8 +56,8 @@ export default function PageHeader({ strong, light, crumb, intro, image }: PageH
         </motion.nav>
 
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 90, scale: 0.94 }}
+          animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
           className="font-heading text-white text-4xl sm:text-5xl md:text-6xl leading-[1.1] mb-5 uppercase"
         >
@@ -71,8 +71,8 @@ export default function PageHeader({ strong, light, crumb, intro, image }: PageH
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 70, scale: 0.94 }}
+          animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
           className="max-w-2xl text-base md:text-lg text-white/85 leading-relaxed"
         >

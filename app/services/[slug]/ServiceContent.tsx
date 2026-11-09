@@ -48,16 +48,16 @@ export default function ServiceContent({ params }: { params: Promise<{ slug: str
               Retour aux services
             </Link>
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 70, scale: 0.94 }}
+              animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
               transition={{ delay: 0.05 }}
               className="text-4xl md:text-6xl font-black font-heading tracking-tight mb-4 text-white uppercase"
             >
               {service.title}
             </motion.h1>
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 70, scale: 0.94 }}
+              animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
               transition={{ delay: 0.1 }}
               className="text-lg md:text-2xl text-slate-400 font-medium max-w-3xl leading-relaxed"
             >
@@ -81,8 +81,8 @@ export default function ServiceContent({ params }: { params: Promise<{ slug: str
                 {service.features.map((feature, idx) => (
                   <motion.li
                     key={idx}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, x: -120 }}
+                    whileInView={{ opacity: 1, x: 0, scale: 1, rotate: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.1 }}
                     className="flex items-start gap-4 bg-white/[0.03] border border-white/10 rounded-2xl p-5 hover:border-[#34c4eb]/30 hover:bg-white/[0.05] transition-all duration-300"

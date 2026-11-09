@@ -80,7 +80,7 @@ export default function HeroSection() {
         <motion.div
           key={slide}
           initial={{ opacity: 0, scale: 1.12 }}
-          animate={{ opacity: 1, scale: 1 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
           exit={{ opacity: 0 }}
           transition={{
             opacity: { duration: 1.4, ease: "easeInOut" },
@@ -103,8 +103,8 @@ export default function HeroSection() {
 
       {/* Large translucent monogram */}
       <motion.div
-        initial={{ opacity: 0, x: 80 }}
-        animate={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, x: 300, rotate: 8 }}
+        animate={{ opacity: 1, x: 0, scale: 1, rotate: 0 }}
         transition={{ duration: 1.4, delay: 0.3, ease: "easeOut" }}
         className="absolute right-[-12%] sm:right-[-4%] lg:right-[4%] top-[14%] h-[62%] pointer-events-none"
       >
@@ -118,8 +118,8 @@ export default function HeroSection() {
             {HEADLINES.map((line, i) => (
               <motion.span
                 key={line.strong}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 90, scale: 0.94 }}
+                animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 + i * 0.18, ease: "easeOut" }}
                 className="block"
               >
@@ -130,8 +130,8 @@ export default function HeroSection() {
           </h1>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 70, scale: 0.94 }}
+            animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
             transition={{ duration: 0.8, delay: 1.1 }}
             className="lg:mb-3"
           >
