@@ -9,7 +9,7 @@ export type Realisation = {
   /** Light tint behind the logo (the logos have white backgrounds) */
   tint: string;
   status: "live" | "production";
-  /** Google Play listing. TODO: replace the search URLs with the real store links. */
+  /** Google Play listing */
   playStoreUrl?: string;
 };
 
@@ -17,34 +17,36 @@ export const realisationsData: Record<string, Realisation> = {
   kitunga: {
     title: "Kitunga",
     category: "Application mobile · Android",
-    subtitle: "Faites vos achats en ligne, simplement",
+    subtitle: "Marketplace de livraison à domicile à Brazzaville",
     description:
-      "Kitunga est une application d'achat en ligne qui permet de parcourir des produits, de remplir son panier et de passer commande directement depuis son téléphone.",
+      "Kitunga permet de commander auprès de boutiques, restaurants, pharmacies et magasins partenaires, puis de se faire livrer directement chez soi à Brazzaville.",
     features: [
-      "Catalogue de produits facile à parcourir",
+      "Boutiques, restaurants, pharmacies et magasins partenaires",
       "Panier et commande en quelques étapes",
-      "Interface pensée pour le mobile",
+      "Paiement via Mobile Money (MTN MoMo, Airtel Money)",
+      "Livraison à l'adresse indiquée, partout à Brazzaville",
     ],
     image: "/LOGO-1-APPLI.png",
     tint: "from-[#fff1f1] to-[#f3f4f6]",
     status: "live",
-    playStoreUrl: "https://play.google.com/store/search?q=Kitunga&c=apps",
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.ntemoconsulting.kitunga",
   },
   "mobembo-line": {
     title: "Mobembo-Line",
     category: "Application mobile · Android",
-    subtitle: "Vente & achat de tickets de bus",
+    subtitle: "Réservation de billets de voyage au Congo",
     description:
-      "Mobembo-Line permet d'acheter et de vendre des tickets de bus au Congo directement depuis son téléphone, sans passer par le guichet.",
+      "Mobembo-Line réunit les agences de voyage partenaires sur une seule plateforme : on compare les départs, on réserve et on paie son billet depuis son téléphone, sans passer par le guichet.",
     features: [
-      "Recherche de trajets et de départs",
-      "Achat de tickets depuis le téléphone",
-      "Ticket toujours disponible dans l'application",
+      "Horaires et prix de plusieurs agences comparés",
+      "Réservation et paiement sécurisé en quelques clics",
+      "Billet électronique reçu directement dans l'application",
+      "Brazzaville, Pointe-Noire, Dolisie, Nkayi, Owando, Ouesso…",
     ],
     image: "/LOGO-2.jpeg",
     tint: "from-[#f1faea] to-[#fffbe6]",
     status: "live",
-    playStoreUrl: "https://play.google.com/store/search?q=Mobembo-Line&c=apps",
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.mobemboline.mobile",
   },
 };
 
