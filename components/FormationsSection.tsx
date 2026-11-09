@@ -3,7 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { half, splitBlock } from "@/components/splitMotion";
+import { half, splitBlock, splitBlockHoverClass, photoHoverClass } from "@/components/splitMotion";
 import { ArrowUpRight, Clock, Target } from "lucide-react";
 
 const U = (id: string) => `https://images.unsplash.com/photo-${id}?w=1400&q=80`;
@@ -79,7 +79,7 @@ export default function FormationsSection() {
             <motion.div
               key={f.title}
               {...splitBlock}
-              className="grid grid-cols-1 lg:grid-cols-2 min-h-[460px] max-w-6xl mx-auto"
+              className={`grid grid-cols-1 lg:grid-cols-2 min-h-[460px] max-w-6xl mx-auto ${splitBlockHoverClass}`}
             >
               {/* Text panel */}
               <motion.div
@@ -143,14 +143,14 @@ export default function FormationsSection() {
               {/* Photo */}
               <motion.div
                 {...half(photoLeft ? "left" : "right", 0.05)}
-                className={`relative min-h-[300px] sm:min-h-[400px] lg:min-h-0 ${photoLeft ? "lg:order-first" : ""}`}
+                className={`relative overflow-hidden min-h-[300px] sm:min-h-[400px] lg:min-h-0 ${photoLeft ? "lg:order-first" : ""}`}
               >
                 <Image
                   src={f.image}
                   alt={f.alt}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
+                  className={`object-cover ${photoHoverClass}`}
                 />
               </motion.div>
             </motion.div>

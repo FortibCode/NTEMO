@@ -3,7 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { half, splitBlock } from "@/components/splitMotion";
+import { half, splitBlock, splitBlockHoverClass, photoHoverClass } from "@/components/splitMotion";
 import { ArrowUpRight, Ear, Palette, Shield, Target, Handshake } from "lucide-react";
 
 const values = [
@@ -48,9 +48,9 @@ function Photo({ src, alt, fromLeft }: { src: string; alt: string; fromLeft?: bo
   return (
     <motion.div
       {...half(fromLeft ? "left" : "right", 0.05)}
-      className={`relative min-h-[320px] sm:min-h-[420px] lg:min-h-0 ${fromLeft ? "lg:order-first" : ""}`}
+      className={`relative overflow-hidden min-h-[320px] sm:min-h-[420px] lg:min-h-0 ${fromLeft ? "lg:order-first" : ""}`}
     >
-      <Image src={src} alt={alt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+      <Image src={src} alt={alt} fill sizes="(max-width: 1024px) 100vw, 50vw" className={`object-cover ${photoHoverClass}`} />
     </motion.div>
   );
 }
@@ -92,7 +92,7 @@ export default function MissionValuesSection() {
       <div className="container mx-auto px-4 md:px-8 space-y-16 md:space-y-24">
 
         {/* Mission: text left, photo right */}
-        <motion.div {...splitBlock} className="grid grid-cols-1 lg:grid-cols-2 min-h-[480px] max-w-6xl mx-auto">
+        <motion.div {...splitBlock} className={`grid grid-cols-1 lg:grid-cols-2 min-h-[480px] max-w-6xl mx-auto ${splitBlockHoverClass}`}>
           <Panel>
             <Heading strong="Notre" light="mission" />
             <motion.p
@@ -118,13 +118,19 @@ export default function MissionValuesSection() {
         </motion.div>
 
         {/* Values: photo left, list right */}
-        <motion.div {...splitBlock} className="grid grid-cols-1 lg:grid-cols-2 min-h-[480px] max-w-6xl mx-auto">
+        <motion.div {...splitBlock} className={`grid grid-cols-1 lg:grid-cols-2 min-h-[480px] max-w-6xl mx-auto ${splitBlockHoverClass}`}>
           <Panel fromRight>
             <Heading strong="Nos" light="valeurs" />
             <ul className="space-y-5">
               {values.map(({ icon: Icon, title, description }) => (
-                <motion.li key={title} variants={itemVariants} className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-full bg-[#0a1d6e] text-white flex items-center justify-center">
+                <motion.li
+                  key={title}
+                  variants={itemVariants}
+                  whileHover={{ x: 10 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="group/value flex items-start gap-4 cursor-default"
+                >
+                  <span className="flex-shrink-0 w-10 h-10 rounded-full bg-[#0a1d6e] text-white flex items-center justify-center transition-all duration-500 group-hover/value:rotate-[360deg] group-hover/value:bg-[#2488cd] group-hover/value:scale-110">
                     <Icon size={18} />
                   </span>
                   <div>

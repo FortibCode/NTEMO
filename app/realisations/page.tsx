@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { half, splitBlock } from "@/components/splitMotion";
+import { half, splitBlock, splitBlockHoverClass, photoHoverClass } from "@/components/splitMotion";
 import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -43,7 +43,7 @@ export default function RealisationsPage() {
                 <motion.div
                   key={p.slug}
                   {...splitBlock}
-                  className="grid grid-cols-1 lg:grid-cols-2 min-h-[480px] max-w-6xl mx-auto"
+                  className={`grid grid-cols-1 lg:grid-cols-2 min-h-[480px] max-w-6xl mx-auto ${splitBlockHoverClass}`}
                 >
                   {/* Text panel */}
                   <motion.div
@@ -112,6 +112,7 @@ export default function RealisationsPage() {
                       logoLeft ? "lg:order-first" : ""
                     }`}
                   >
+                    <div className={`w-full max-w-[340px] ${photoHoverClass}`}>
                     <motion.img
                       src={p.image}
                       alt={`Logo ${p.title}`}
@@ -119,8 +120,9 @@ export default function RealisationsPage() {
                       whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
-                      className="w-full max-w-[340px] h-auto object-contain mix-blend-multiply"
+                      className="w-full h-auto object-contain mix-blend-multiply"
                     />
+                    </div>
                   </motion.div>
                 </motion.div>
               );

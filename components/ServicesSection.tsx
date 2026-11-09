@@ -90,7 +90,7 @@ export default function ServicesSection() {
           aria-roledescription="carousel"
           aria-label="Nos services"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 lg:h-[520px] overflow-hidden">
+          <div className="group grid grid-cols-1 lg:grid-cols-2 lg:h-[520px] overflow-hidden">
 
             {/* Left: photo + headline */}
             <div className="relative h-[320px] sm:h-[400px] lg:h-full overflow-hidden bg-slate-900">
@@ -117,7 +117,7 @@ export default function ServicesSection() {
                     alt={data.title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover pointer-events-none"
+                    className="object-cover pointer-events-none transition-transform duration-[900ms] ease-out group-hover:scale-110"
                     priority={index === 0}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />

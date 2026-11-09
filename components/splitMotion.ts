@@ -15,7 +15,17 @@ export const splitBlock = {
   initial: "hidden",
   whileInView: "visible",
   viewport: { once: true, margin: "-80px" },
+  // Mouse over (or finger on mobile): the whole card lifts; a tap presses it
+  whileHover: { y: -12, transition: { type: "spring", stiffness: 260, damping: 18 } },
+  whileTap: { scale: 0.985 },
 } as const;
+
+/** Classes for the block wrapper: shadow on hover + `group` for the photo zoom. */
+export const splitBlockHoverClass =
+  "group transition-shadow duration-500 hover:shadow-[0_40px_80px_-24px_rgba(0,0,0,0.65)]";
+
+/** Classes for the photo inside a block: slow zoom while the card is hovered. */
+export const photoHoverClass = "transition-transform duration-[900ms] ease-out group-hover:scale-110";
 
 /** Spread on each half inside a `splitBlock` wrapper. */
 export function half(side: "left" | "right", delay = 0) {

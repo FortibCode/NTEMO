@@ -103,6 +103,12 @@ export default function TeamSection() {
               key={member.name}
               custom={index}
               variants={cardVariants}
+              whileHover={{
+                y: -14,
+                rotate: index < teamMembers.length / 2 ? -2 : 2,
+                transition: { type: "spring", stiffness: 300, damping: 18 },
+              }}
+              whileTap={{ scale: 0.96 }}
               className="max-w-[320px] w-full mx-auto"
             >
               {/* Photo with hover excerpt */}

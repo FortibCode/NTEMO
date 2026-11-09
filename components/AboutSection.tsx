@@ -3,7 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { half, splitBlock } from "@/components/splitMotion";
+import { half, splitBlock, splitBlockHoverClass, photoHoverClass } from "@/components/splitMotion";
 import { ArrowUpRight } from "lucide-react";
 
 const containerVariants: Variants = {
@@ -23,7 +23,7 @@ export default function AboutSection() {
   return (
     <section id="about" className="py-24 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
-      <motion.div {...splitBlock} className="grid grid-cols-1 lg:grid-cols-2 min-h-[520px] max-w-6xl mx-auto">
+      <motion.div {...splitBlock} className={`grid grid-cols-1 lg:grid-cols-2 min-h-[520px] max-w-6xl mx-auto ${splitBlockHoverClass}`}>
 
         {/* Left: brand panel */}
         <motion.div
@@ -80,14 +80,14 @@ export default function AboutSection() {
         {/* Right: photo */}
         <motion.div
           {...half("right", 0.05)}
-          className="relative min-h-[320px] sm:min-h-[420px] lg:min-h-0"
+          className="relative overflow-hidden min-h-[320px] sm:min-h-[420px] lg:min-h-0"
         >
           <Image
             src="https://images.unsplash.com/photo-1739298061707-cefee19941b7?w=1400&q=80"
             alt="Réunion de travail d'une équipe autour d'une table"
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
+            className={`object-cover ${photoHoverClass}`}
           />
         </motion.div>
 
