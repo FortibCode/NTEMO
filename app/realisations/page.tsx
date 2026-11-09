@@ -41,8 +41,8 @@ export default function RealisationsPage() {
               const logoLeft = index % 2 === 1;
               return (
                 <motion.div
-                  {...splitBlock}
                   key={p.slug}
+                  {...splitBlock}
                   className="grid grid-cols-1 lg:grid-cols-2 min-h-[480px] max-w-6xl mx-auto"
                 >
                   {/* Text panel */}

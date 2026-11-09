@@ -77,8 +77,8 @@ export default function FormationsSection() {
           const photoLeft = index % 2 === 1;
           return (
             <motion.div
-              {...splitBlock}
               key={f.title}
+              {...splitBlock}
               className="grid grid-cols-1 lg:grid-cols-2 min-h-[460px] max-w-6xl mx-auto"
             >
               {/* Text panel */}
