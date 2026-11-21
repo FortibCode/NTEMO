@@ -100,7 +100,7 @@ export default function Footer() {
           <p>© {currentYear} <span className="text-slate-900 font-semibold">NTEMO Consulting</span>. Tous droits réservés.</p>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-[#2488cd] transition-colors">Mentions légales</a>
-            <a href="#" className="hover:text-[#2488cd] transition-colors">Politique de confidentialité</a>
+            <Link href="/privacy" className="hover:text-[#2488cd] transition-colors">Politique de confidentialité</Link>
           </div>
         </div>
       </div>
