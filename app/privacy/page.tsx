@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const CONTACT_EMAIL = "contact@ntemoconsulting.com";
-const UPDATED = "21 novembre 2026";
+const UPDATED = "22 novembre 2026";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -63,8 +63,8 @@ export default function PrivacyPage() {
               <List
                 items={[
                   <>
-                    <strong>Identité et compte</strong> : nom, adresse e-mail, numéro de téléphone et identifiants de
-                    connexion.
+                    <strong>Identité et compte</strong> : nom, adresse e-mail, numéro de téléphone, identifiants de
+                    connexion et photo de profil si vous en ajoutez une.
                   </>,
                   <>
                     <strong>Livraison</strong> : adresse de livraison et, si vous l&apos;autorisez, la localisation de
@@ -85,7 +85,7 @@ export default function PrivacyPage() {
             <Section title="3. Pourquoi nous les utilisons">
               <List
                 items={[
-                  "Créer et gérer votre compte.",
+                  "Créer et gérer votre compte, et enregistrer vos paniers.",
                   "Traiter vos commandes et les transmettre aux boutiques, restaurants et pharmacies concernés.",
                   "Organiser la livraison à l'adresse indiquée.",
                   "Traiter vos paiements Mobile Money (MTN MoMo, Airtel Money).",
@@ -123,9 +123,10 @@ export default function PrivacyPage() {
 
             <Section title="6. Durée de conservation">
               <p>
-                Vos données sont conservées tant que votre compte est actif. Lorsque vous supprimez votre compte, elles
-                sont supprimées, à l&apos;exception des informations que la loi nous oblige à conserver (par exemple
-                les justificatifs de transactions), pendant la durée légale requise.
+                Vos données sont conservées tant que votre compte est actif. Lorsque vous supprimez votre compte depuis
+                l&apos;application, votre profil, vos coordonnées, votre photo et vos paniers sont effacés
+                immédiatement et définitivement (voir la section 8). Seules les informations que la loi nous oblige à
+                conserver, comme les justificatifs de transactions, sont gardées pendant la durée légale requise.
               </p>
             </Section>
 
@@ -138,17 +139,51 @@ export default function PrivacyPage() {
 
             <Section title="8. Vos droits et la suppression de votre compte">
               <p>
-                Vous pouvez à tout moment demander l&apos;accès à vos données, leur correction ou la suppression de
-                votre compte et de toutes les données associées.
+                Vous pouvez à tout moment accéder à vos données, les corriger ou supprimer votre compte et les données
+                associées.
               </p>
+
+              <h3 className="font-heading font-bold text-[#0a1d6e] pt-2">
+                Supprimer votre compte depuis l&apos;application
+              </h3>
               <p>
-                Pour cela, écrivez-nous à{" "}
+                Vous pouvez supprimer votre compte vous-même, directement dans Kitunga, en allant dans{" "}
+                <strong>Profil › Paramètres › Supprimer mon compte</strong>. La suppression se déroule ainsi :
+              </p>
+              <ol className="list-decimal pl-6 space-y-2 marker:text-[#2488cd] marker:font-semibold">
+                <li>
+                  <strong>Confirmation.</strong> Une fenêtre « Supprimer mon compte » s&apos;affiche avec
+                  l&apos;avertissement suivant : « Cette action est définitive. Votre profil, vos coordonnées, votre
+                  photo et vos paniers seront effacés, et vous ne pourrez plus vous connecter avec ce compte. »
+                </li>
+                <li>
+                  <strong>Vérification de votre identité.</strong> Pour éviter toute suppression par erreur ou par un
+                  tiers, vous devez saisir votre mot de passe, qui est vérifié de manière sécurisée.
+                </li>
+                <li>
+                  <strong>Effacement de vos données.</strong> Dès votre confirmation, votre profil, vos coordonnées,
+                  votre photo de profil et vos paniers sont définitivement effacés de nos serveurs, puis votre compte
+                  de connexion est supprimé.
+                </li>
+                <li>
+                  <strong>Fin de session.</strong> Vous êtes immédiatement déconnecté et redirigé vers l&apos;écran
+                  d&apos;accueil, où le message « Votre compte a été supprimé. » confirme l&apos;opération.
+                </li>
+              </ol>
+              <p>
+                La suppression est immédiate et ne peut pas être annulée : vous ne pourrez plus vous connecter avec ce
+                compte. Pour utiliser à nouveau Kitunga, il faudra créer un nouveau compte.
+              </p>
+
+              <h3 className="font-heading font-bold text-[#0a1d6e] pt-2">Autres demandes</h3>
+              <p>
+                Si vous ne pouvez plus accéder à l&apos;application, ou pour toute autre demande concernant vos données
+                (accès, correction), écrivez-nous à{" "}
                 <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#2488cd] underline underline-offset-2">
                   {CONTACT_EMAIL}
                 </a>{" "}
-                avec l&apos;objet « Suppression de compte Kitunga », depuis l&apos;adresse e-mail ou en indiquant le
-                numéro de téléphone lié à votre compte. Nous traitons votre demande dans un délai de 30 jours et vous
-                confirmons la suppression.
+                avec l&apos;objet « Données personnelles Kitunga », en indiquant l&apos;adresse e-mail ou le numéro de
+                téléphone lié à votre compte. Nous vous répondons dans un délai de 30 jours.
               </p>
             </Section>
 
